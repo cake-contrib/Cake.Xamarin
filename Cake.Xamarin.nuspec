@@ -17,12 +17,12 @@
       <tags>Cake Script Build Xamarin</tags>
 
       <dependencies>
-         <dependency id="Cake.Core" />
+         <dependency id="Cake.Core" version="0.5.2" />
       </dependencies>
    </metadata>
 
    <files>
-      <file src="Cake.Xamarin\bin\Release\Cake.Xamarin.dll" target="lib/net45" />
-      <file src="Cake.Xamarin\bin\Release\Cake.Xamarin.xml" target="lib/net45" />      
+      <file src="./Cake.Xamarin/bin/Release/Cake.Xamarin.dll" target="lib/net45" />
+      <file src="./Cake.Xamarin/bin/Release/Cake.Xamarin.xml" target="lib/net45" />      
    </files>
 </package>
