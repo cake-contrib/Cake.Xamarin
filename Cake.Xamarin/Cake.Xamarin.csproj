@@ -38,13 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Aliases\AndroidAliases.cs" />
+    <Compile Include="AndroidAliases.cs" />
+    <Compile Include="MDToolRunner.cs" />
+    <Compile Include="MDToolSettings.cs" />
+    <Compile Include="XamarinComponentRunner.cs" />
+    <Compile Include="XamarinComponentSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Aliases\" />
   </ItemGroup>
 </Project>
