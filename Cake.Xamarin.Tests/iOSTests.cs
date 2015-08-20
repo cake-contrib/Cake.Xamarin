@@ -6,7 +6,7 @@ using Cake.Common.IO;
 
 namespace Cake.Xamarin.Tests
 {
-    [TestFixture, Category ("iOS Tests")]
+    [TestFixture, Category ("iOSTests")]
     public class iOSTests
     {
         FakeCakeContext context;
@@ -35,7 +35,7 @@ namespace Cake.Xamarin.Tests
         }
     }
 
-    [TestFixture, Category ("iOS Tests Mac Only")]
+    [TestFixture, Category ("iOSTestsMacOnly")]
     public class iOSTestsMacOnly
     {
         FakeCakeContext context;
