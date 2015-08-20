@@ -10,6 +10,7 @@ using Cake.Common.IO;
 
 namespace Cake.Xamarin.Tests
 {
+    [TestFixture, Category ("Xamarin Component Tests")]
     public class XamarinComponentTests
     {
         FakeCakeContext context;
