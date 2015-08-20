@@ -37,7 +37,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSigningKeyStore>/Users/redth/Dropbox (Personal)/GitHub/Cake.Xamarin/Cake.Xamarin.Tests/TestProjects/HelloWorld/HelloWorld/helloworld.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>helloworld.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>helloworld</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>helloworld</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>helloworld</AndroidSigningKeyPass>
