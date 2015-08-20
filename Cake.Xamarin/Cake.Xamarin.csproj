@@ -39,11 +39,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AndroidAliases.cs" />
     <Compile Include="MDToolRunner.cs" />
     <Compile Include="XamarinComponentRunner.cs" />
     <Compile Include="XamarinComponentSettings.cs" />
     <Compile Include="TestCloudRunner.cs" />
+    <Compile Include="Aliases.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

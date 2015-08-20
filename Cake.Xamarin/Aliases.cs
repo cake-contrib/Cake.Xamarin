@@ -29,6 +29,9 @@ namespace Cake.Xamarin
         {
             var target = sign ? "SignAndroidPackage" : "PackageForAndroid";
 
+            if (!context.FileSystem.Exist (projectFile))
+                throw new CakeException ("Project File Not Found: " + projectFile.FullPath);
+            
             context.DotNetBuild (projectFile, c => {
                 c.Configuration = "Release";        
                 c.Targets.Add (target);
@@ -38,9 +41,11 @@ namespace Cake.Xamarin
                     configurator (c);
             });
 
+            var searchPattern = projectFile.GetDirectory () + (sign ? "/**/*-Signed.apk" : "/**/*.apk");
+
             // Use the globber to find any .apk files within the tree
             return context.Globber
-                .GetFiles (sign ? "./**/*-Signed.apk" : "./**/*.apk")
+                .GetFiles (searchPattern)
                 .OrderBy (f => new FileInfo (f.FullPath).LastWriteTimeUtc)
                 .FirstOrDefault ();            
         }
@@ -105,24 +110,24 @@ namespace Cake.Xamarin
         /// Restores Xamarin Components for a given project
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="projectFile">The project file.</param>
+        /// <param name="solutionFile">The project file.</param>
         [CakeMethodAlias]
-        public static void RestoreComponents (this ICakeContext context, FilePath projectFile)
+        public static void RestoreComponents (this ICakeContext context, FilePath solutionFile)
         {
-            RestoreComponents (context, projectFile, new XamarinComponentSettings ());
+            RestoreComponents (context, solutionFile, new XamarinComponentSettings ());
         }
 
         /// <summary>
         /// Restores Xamarin Components for a given project
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="projectFile">The project file.</param>
+        /// <param name="solutionFile">The project file.</param>
         /// <param name="settings">The xamarin-component.exe tool settings.</param>
         [CakeMethodAlias]
-        public static void RestoreComponents (this ICakeContext context, FilePath projectFile, XamarinComponentSettings settings)
+        public static void RestoreComponents (this ICakeContext context, FilePath solutionFile, XamarinComponentSettings settings)
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Restore (projectFile, settings);
+            runner.Restore (solutionFile, settings);
         }
 
         /// <summary>
