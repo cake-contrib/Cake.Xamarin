@@ -59,7 +59,9 @@ namespace Cake.Xamarin
         [CakeMethodAlias]
         public static void iOSArchive (this ICakeContext context, FilePath solutionFile, string projectName)
         {
-            iOSArchive (context, solutionFile, projectName, new MDToolSettings ());
+            iOSArchive (context, solutionFile, projectName, new MDToolSettings {
+                Configuration = "Release|iPhone"
+            });
         }
 
         /// <summary>
@@ -83,27 +85,53 @@ namespace Cake.Xamarin
         /// Builds a Xamarin.iOS project
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="projectFile">The project file.</param>
+        /// <param name="projectOrSolutionFile">The project or solution file.</param>
         [CakeMethodAlias]
-        public static void iOSBuild (this ICakeContext context, FilePath projectFile)
+        public static void iOSBuild (this ICakeContext context, FilePath projectOrSolutionFile)
         {
-            iOSBuild (context, projectFile, new MDToolSettings ());
+            iOSBuild (context, projectOrSolutionFile, new MDToolSettings ());
         }
 
         /// <summary>
         /// Builds a Xamarin.iOS project
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="projectFile">The project file.</param>
+        /// <param name="projectOrSolutionFile">The project or solution file.</param>
         /// <param name="settings">The mdtool settings.</param>
         [CakeMethodAlias]
-        public static void iOSBuild (this ICakeContext context, FilePath projectFile, MDToolSettings settings)
+        public static void iOSBuild (this ICakeContext context, FilePath projectOrSolutionFile, MDToolSettings settings)
         {
             if (!context.Environment.IsUnix ())
                 throw new CakeException ("iOSBuild alias only runs on Mac OSX");
             
             var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Build (projectFile, settings);
+            runner.Build (projectOrSolutionFile, settings);
+        }
+
+        /// <summary>
+        /// Builds a Xamarin.iOS project
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="projectOrSolutionFile">The project file.</param>
+        [CakeMethodAlias]
+        public static void iOSMSBuild (this ICakeContext context, FilePath projectOrSolutionFile)
+        {
+            iOSMSBuild (context, projectOrSolutionFile, null);
+        }
+
+        /// <summary>
+        /// Builds a Xamarin.iOS project
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="projectOrSolutionFile">The project file.</param>
+        /// <param name="configurator">The configurator.</param>
+        [CakeMethodAlias]
+        public static void iOSMSBuild (this ICakeContext context, FilePath projectOrSolutionFile, Action<DotNetBuildSettings> configurator)
+        {
+            if (configurator != null)
+                context.DotNetBuild (projectOrSolutionFile, configurator);
+            else
+                context.DotNetBuild (projectOrSolutionFile);
         }
 
         /// <summary>
