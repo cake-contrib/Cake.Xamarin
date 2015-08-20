@@ -6,10 +6,11 @@ using Cake.Core.IO;
 using System.Collections.Generic;
 using Cake.Xamarin.Tests.Fakes;
 using Cake.Xamarin;
+using Cake.Common.IO;
 
 namespace Cake.Xamarin.Tests
 {
-    [TestFixture]
+    [TestFixture, Category ("Android Tests")]
     public class AndroidTests
     {
         FakeCakeContext context;
@@ -18,6 +19,9 @@ namespace Cake.Xamarin.Tests
         public void Setup ()
         {
             context = new FakeCakeContext ();
+
+            context.CakeContext.CleanDirectories ("./TestProjects/**/bin");
+            context.CakeContext.CleanDirectories ("./TestProjects/**/obj");
         }
 
         [TearDown]
