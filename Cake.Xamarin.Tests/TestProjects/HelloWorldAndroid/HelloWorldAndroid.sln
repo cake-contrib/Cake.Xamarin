@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldAndroid", "HelloWorldAndroid\HelloWorldAndroid.csproj", "{B67606CA-14D4-4F68-A8E3-3FA68160A6E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldAndroid.UITests", "HelloWorldAndroid.UITests\HelloWorldAndroid.UITests.csproj", "{F6F203A0-84ED-4E80-A797-AFB8C60ABD93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B67606CA-14D4-4F68-A8E3-3FA68160A6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67606CA-14D4-4F68-A8E3-3FA68160A6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67606CA-14D4-4F68-A8E3-3FA68160A6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67606CA-14D4-4F68-A8E3-3FA68160A6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F203A0-84ED-4E80-A797-AFB8C60ABD93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F203A0-84ED-4E80-A797-AFB8C60ABD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F203A0-84ED-4E80-A797-AFB8C60ABD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F203A0-84ED-4E80-A797-AFB8C60ABD93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
