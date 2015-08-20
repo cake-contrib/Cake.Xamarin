@@ -7,6 +7,7 @@ using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
 using Cake.Core.Utilities;
+using Cake.Common.Tools.NUnit;
 
 namespace Cake.Xamarin
 {
@@ -122,6 +123,52 @@ namespace Cake.Xamarin
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
             runner.Restore (projectFile, settings);
+        }
+
+        /// <summary>
+        /// Runs UITests in a given assembly using NUnit
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="testsAssembly">The assembly containing NUnit UITests.</param>
+        /// <param name="nunitSettings">The NUnit settings.</param>
+        [CakeMethodAlias]
+        public static void UITest (this ICakeContext context, FilePath testsAssembly, NUnitSettings nunitSettings = null)
+        {            
+            // Run UITests via NUnit
+            context.NUnit (new [] { testsAssembly }, nunitSettings ?? new NUnitSettings ());
+        }
+
+
+        /// <summary>
+        /// Uploads an android .APK package to TestCloud and runs UITests
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="apkFile">The .APK file.</param>
+        /// <param name="apiKey">The TestCloud API key.</param>
+        /// <param name="devicesHash">The hash of the set of devices to run on.</param>
+        /// <param name="userEmail">The user account email address.</param>
+        /// <param name="uitestsAssemblies">The directory containing the UITests assemblies.</param>
+        [CakeMethodAlias]
+        public static void TestCloud (this ICakeContext context, FilePath apkFile, string apiKey, string devicesHash, string userEmail, DirectoryPath uitestsAssemblies)
+        {
+            TestCloud (context, apkFile, apiKey, devicesHash, userEmail, uitestsAssemblies, new TestCloudSettings ());
+        }
+
+        /// <summary>
+        /// Uploads an android .APK package to TestCloud and runs UITests
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="apkFile">The .APK file.</param>
+        /// <param name="apiKey">The TestCloud API key.</param>
+        /// <param name="devicesHash">The hash of the set of devices to run on.</param>
+        /// <param name="userEmail">The user account email address.</param>
+        /// <param name="uitestsAssemblies">The directory containing the UITests assemblies.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void TestCloud (this ICakeContext context, FilePath apkFile, string apiKey, string devicesHash, string userEmail, DirectoryPath uitestsAssemblies, TestCloudSettings settings)
+        {
+            var runner = new TestCloudRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Run (apkFile, apiKey, devicesHash, userEmail, uitestsAssemblies, settings);
         }
     }
 }

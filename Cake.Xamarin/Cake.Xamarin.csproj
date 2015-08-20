@@ -43,6 +43,7 @@
     <Compile Include="MDToolRunner.cs" />
     <Compile Include="XamarinComponentRunner.cs" />
     <Compile Include="XamarinComponentSettings.cs" />
+    <Compile Include="TestCloudRunner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
