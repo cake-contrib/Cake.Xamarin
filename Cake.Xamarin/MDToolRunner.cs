@@ -10,6 +10,19 @@ using Cake.Core.Utilities;
 
 namespace Cake.Xamarin
 {
+    public class MDToolSettings
+    {
+        public MDToolSettings ()
+        {
+            Configuration = "Debug|iPhoneSimulator";
+            Target = "Build";
+        }
+
+        public FilePath ToolPath { get; set; }
+        public bool IncreaseVerbosity { get; set; }
+        public string Configuration { get; set; }
+        public string Target { get; set; }
+    }
 
     public class MDToolRunner : Tool<MDToolSettings>
     {
