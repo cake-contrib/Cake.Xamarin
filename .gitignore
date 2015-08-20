@@ -1,6 +1,8 @@
 bin/
 obj/
 packages/
+Components/
+tools/
 nupkg/
 *.userprefs
 .nugetapikey

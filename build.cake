@@ -28,7 +28,7 @@ Task ("push").IsDependentOn ("nuget").Does (() =>
 	var newestNupkg = GetFiles ("nupkg/*.nupkg")
 		.OrderBy (f => new System.IO.FileInfo (f.FullPath).LastWriteTimeUtc)
 		.LastOrDefault ();
-		
+
 	var apiKey = TransformTextFile ("./.nugetapikey").ToString ();
 
 	NuGetPush (newestNupkg, new NuGetPushSettings { 
@@ -41,6 +41,11 @@ Task ("clean").Does (() =>
 {
 	CleanDirectories ("./**/bin");
 	CleanDirectories ("./**/obj");
+
+	CleanDirectories ("./**/Components");
+	CleanDirectories ("./**/tools");
+
+	DeleteFiles ("./**/*.apk");
 });
 
 RunTarget (target);
