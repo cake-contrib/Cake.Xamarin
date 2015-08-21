@@ -16,7 +16,10 @@ namespace HelloWorld.UITests
         [SetUp]
         public void BeforeEachTest ()
         {
-            app = ConfigureApp.Android.StartApp ();
+            app = ConfigureApp
+                .Android
+                .ApkFile ("app.apk")
+                .StartApp ();
         }
 
         [Test]

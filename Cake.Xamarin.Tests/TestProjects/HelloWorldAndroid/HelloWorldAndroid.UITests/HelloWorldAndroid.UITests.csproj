@@ -6,7 +6,7 @@
     <ProjectGuid>{F6F203A0-84ED-4E80-A797-AFB8C60ABD93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>HelloWorld.UITests</RootNamespace>
-    <AssemblyName>HelloWorld.UITests</AssemblyName>
+    <AssemblyName>HelloWorldAndroid.UITests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -29,11 +29,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.UITest">
-      <HintPath>..\packages\Xamarin.UITest.0.7.1\lib\Xamarin.UITest.dll</HintPath>
+      <HintPath>..\packages\Xamarin.UITest.1.0.0\lib\Xamarin.UITest.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
