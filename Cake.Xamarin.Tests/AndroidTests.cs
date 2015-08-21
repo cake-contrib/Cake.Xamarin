@@ -50,14 +50,21 @@ namespace Cake.Xamarin.Tests
 
             projectFile = new FilePath ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj");
 
-            Console.WriteLine (projectFile.FullPath);
+            FilePath apkFile = null;
 
-            var apkFile = context.CakeContext.AndroidPackage (
-                projectFile,
-                signed,
-                c => {
-                    c.Configuration = "Release";
-                });
+            try {
+                apkFile = context.CakeContext.AndroidPackage(
+                    projectFile,
+                    signed,
+                    c => {
+                        c.Verbosity = Verbosity.Diagnostic;
+                        c.Configuration = "Release";
+                    });
+            } catch (Exception ex) {
+                Console.WriteLine(ex);
+                context.DumpLogs();
+                Assert.Fail(context.GetLogs());
+            }
             
             Assert.IsNotNull (apkFile);
             Assert.IsNotNullOrEmpty (apkFile.FullPath);

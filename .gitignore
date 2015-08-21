@@ -5,4 +5,5 @@ Components/
 tools/
 nupkg/
 *.userprefs
+*.suo
 .nugetapikey

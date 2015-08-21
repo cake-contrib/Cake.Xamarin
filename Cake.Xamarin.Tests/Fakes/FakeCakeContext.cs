@@ -38,6 +38,11 @@ namespace Cake.Xamarin.Tests.Fakes
             get { return context; }
         }
 
+        public string GetLogs ()
+        {
+            return string.Join(Environment.NewLine, log.Messages);
+        }
+
         public void DumpLogs ()
         {
             foreach (var m in log.Messages)
