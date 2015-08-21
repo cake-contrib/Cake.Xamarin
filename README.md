@@ -3,6 +3,12 @@ A set of aliases for http://cakebuild.net to help with Xamarin projects.
 
 ![AppVeyor](https://ci.appveyor.com/api/projects/status/github/redth/Cake.Xamarin)
 
+You can easily reference Cake.Xamarin directly in your build script via a cake addin:
+
+```csharp
+#addin "Cake.Xamarin"
+```
+
 The following Aliases are available:
 
 ### AndroidPackage
