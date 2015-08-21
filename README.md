@@ -46,7 +46,7 @@ void iOSMSBuild (FilePath projectOrSolutionFile)
 ```
 
 ```csharp
-iOSMSBuild (FilePath projectOrSolutionFile, Action<DotNetBuildSettings> configurator)
+void iOSMSBuild (FilePath projectOrSolutionFile, Action<DotNetBuildSettings> configurator)
 ```
 
 ### RestoreComponents
