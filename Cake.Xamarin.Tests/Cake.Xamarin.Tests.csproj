@@ -46,6 +46,7 @@
     <Compile Include="XamarinComponentTests.cs" />
     <Compile Include="Fakes\FakeCakeContext.cs" />
     <Compile Include="iOSTests.cs" />
+    <Compile Include="TestCloudTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

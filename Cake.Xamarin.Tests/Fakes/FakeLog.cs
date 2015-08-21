@@ -33,7 +33,7 @@ namespace Cake.Xamarin.Tests.Fakes
         /// <value>The verbosity.</value>
         public Verbosity Verbosity
         {
-            get { return Verbosity.Quiet; }
+            get { return Verbosity.Diagnostic; }
         }
 
         /// <summary>

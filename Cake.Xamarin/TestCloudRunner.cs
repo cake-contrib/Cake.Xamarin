@@ -55,7 +55,7 @@ namespace Cake.Xamarin
             builder.Append ("--assembly-dir");
             builder.AppendQuoted (uitestAssemblies.MakeAbsolute (_cakeEnvironment).FullPath);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder, settings.ToolPath, new ProcessSettings { RedirectStandardOutput = true }, null);
         }
     }
 }

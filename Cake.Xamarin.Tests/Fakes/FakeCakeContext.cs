@@ -26,6 +26,9 @@ namespace Cake.Xamarin.Tests.Fakes
             var toolResolvers = new List<IToolResolver> ();
             var registry = new WindowsRegistry ();
 
+            var nugetToolResolver = new Cake.Core.IO.NuGet.NuGetToolResolver (fileSystem, environment, globber);
+            toolResolvers.Add (nugetToolResolver);
+
             context = new CakeContext (fileSystem, environment, globber, log, args, processRunner, toolResolvers, registry);
             context.Environment.WorkingDirectory = testsDir;
         }
