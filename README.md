@@ -6,7 +6,7 @@ A set of aliases for http://cakebuild.net to help with Xamarin projects.
 The following Aliases are available:
 
 ### AndroidPackage
-Creates an android .APK package file
+Creates an android .APK package file and returns the path of the created .APK
 ```csharp
 FilePath AndroidPackage (FilePath projectFile, bool sign = false, Action<DotNetBuildSettings> configurator = null)
 ```
