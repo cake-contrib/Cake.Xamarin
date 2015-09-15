@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
       <id>Cake.Xamarin</id>
-      <version>1.0.16</version>
+      <version>1.0.17</version>
       <authors>Redth</authors>
       <owners>Redth</owners>
       <title>Cake.Xamarin</title>
@@ -17,7 +17,7 @@
       <tags>Cake Script Build Xamarin</tags>
 
       <dependencies>
-         <dependency id="Cake.Core" version="0.5.2" />
+         <dependency id="Cake.Core" version="0.5.4" />
       </dependencies>
    </metadata>
 
