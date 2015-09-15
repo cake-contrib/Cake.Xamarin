@@ -9,10 +9,10 @@ You can easily reference Cake.Xamarin directly in your build script via a cake a
 #addin "Cake.Xamarin"
 ```
 
-Aliases
-##
+## Aliases
 
 Please visit the Cake Documentation for a list of available aliases:
+
 [http://cakebuild.net/dsl/xamarin](http://cakebuild.net/dsl/xamarin)
 
 ## Apache License 2.0
