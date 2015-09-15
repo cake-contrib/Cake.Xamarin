@@ -6,20 +6,40 @@ using System.Collections.Generic;
 
 namespace Cake.Xamarin
 {
+    /// <summary>
+    /// Test cloud settings.
+    /// </summary>
     public class TestCloudSettings 
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cake.Xamarin.TestCloudSettings"/> class.
+        /// </summary>
         public TestCloudSettings ()
         {
             Series = "master";
             Locale = "en-US";
         }
 
+        /// <summary>
+        /// Gets or sets the test-cloud.exe path.
+        /// </summary>
+        /// <value>The test-cloud.exe path.</value>
         public FilePath ToolPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the series to test in the cloud.
+        /// </summary>
+        /// <value>The series.</value>
         public string Series { get;set; }
+
+        /// <summary>
+        /// Gets or sets the locale to test with.
+        /// </summary>
+        /// <value>The locale.</value>
         public string Locale { get; set; }
     }
 
-    public class TestCloudRunner : Tool<TestCloudSettings>
+    internal class TestCloudRunner : Tool<TestCloudSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 

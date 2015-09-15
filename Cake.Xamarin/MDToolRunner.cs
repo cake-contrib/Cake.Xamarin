@@ -1,30 +1,51 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Cake.Common.Tools;
+
 using Cake.Core;
-using Cake.Core.Annotations;
 using Cake.Core.IO;
 using Cake.Core.Utilities;
 
 namespace Cake.Xamarin
 {
+    /// <summary>
+    /// MD tool settings.
+    /// </summary>
     public class MDToolSettings
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cake.Xamarin.MDToolSettings"/> class.
+        /// </summary>
         public MDToolSettings ()
         {
             Configuration = "Debug|iPhoneSimulator";
             Target = "Build";
         }
 
+        /// <summary>
+        /// Gets or sets the mdtool path.
+        /// </summary>
+        /// <value>The tool path.</value>
         public FilePath ToolPath { get; set; }
+
+        /// <summary>
+        /// Adds the -v flag to the mdtool command.
+        /// </summary>
+        /// <value><c>true</c> if increase verbosity; otherwise, <c>false</c>.</value>
         public bool IncreaseVerbosity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the configuration mode to build for.
+        /// </summary>
+        /// <value>The configuration.</value>
         public string Configuration { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target to build.
+        /// </summary>
+        /// <value>The target.</value>
         public string Target { get; set; }
     }
 
-    public class MDToolRunner : Tool<MDToolSettings>
+    internal class MDToolRunner : Tool<MDToolSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 

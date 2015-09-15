@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Cake.Common.Tools;
-using Cake.Core;
-using Cake.Core.Annotations;
 using Cake.Core.IO;
-using Cake.Core.Utilities;
 
 namespace Cake.Xamarin
 {
-
+    /// <summary>
+    /// Xamarin component tool settings.
+    /// </summary>
     public class XamarinComponentSettings
     {
+        /// <summary>
+        /// Gets or sets the xamarin-component.exe path.
+        /// </summary>
+        /// <value>The path to xamarin-component.exe.</value>
         public FilePath ToolPath { get; set; }
     }
 
