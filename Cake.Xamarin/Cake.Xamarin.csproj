@@ -44,6 +44,7 @@
     <Compile Include="XamarinComponentSettings.cs" />
     <Compile Include="TestCloudRunner.cs" />
     <Compile Include="Aliases.cs" />
+    <Compile Include="Namespaces.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

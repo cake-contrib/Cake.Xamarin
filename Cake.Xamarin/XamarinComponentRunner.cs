@@ -32,7 +32,17 @@ namespace Cake.Xamarin
             builder.Append ("restore");
             builder.AppendQuoted (projectFile.MakeAbsolute (_cakeEnvironment).FullPath);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder, settings.ToolPath, new ProcessSettings { RedirectStandardOutput = true }, null);
+        }
+
+        public void Package (DirectoryPath componentYamlDirectory, XamarinComponentSettings settings)
+        {
+            var builder = new ProcessArgumentBuilder ();
+
+            builder.Append ("package");
+            builder.AppendQuoted (componentYamlDirectory.MakeAbsolute (_cakeEnvironment).FullPath);
+
+            Run (settings, builder, settings.ToolPath, new ProcessSettings { RedirectStandardOutput = true }, null);
         }
     }
 }

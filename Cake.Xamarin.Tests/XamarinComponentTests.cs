@@ -20,6 +20,8 @@ namespace Cake.Xamarin.Tests
         {
             context = new FakeCakeContext ();   
 
+            context.CakeContext.DeleteFiles ("./TestProjects/ComponentPackage/*.xam");
+
             if (!context.CakeContext.FileSystem.Exist (new FilePath ("./TestProjects/tools/xamarin-component.exe"))) {
                 context.CakeContext.CreateDirectory ("./TestProjects/tools/");
                 context.CakeContext.DownloadFile ("https://components.xamarin.com/submit/xpkg", "./TestProjects/tools/xpkg.zip");
@@ -45,6 +47,18 @@ namespace Cake.Xamarin.Tests
             var componentLib = new FilePath ("./TestProjects/ComponentRestoreAndroid/Components/AndHUD-1.3.1/lib/android/AndHUD.dll");
 
             Assert.IsTrue (context.CakeContext.FileSystem.Exist (componentLib));
+        }
+
+        [Test]
+        public void PackageComponentTest ()
+        {
+            var yaml = new DirectoryPath ("./TestProjects/ComponentPackage/");
+
+            context.CakeContext.PackageComponent (yaml, new XamarinComponentSettings {
+                ToolPath = "./TestProjects/tools/xamarin-component.exe"
+            });
+
+            Assert.IsTrue (context.CakeContext.FileExists ("./TestProjects/ComponentPackage/testcomponent-1.0.0.0.xam"));
         }
     }
 }

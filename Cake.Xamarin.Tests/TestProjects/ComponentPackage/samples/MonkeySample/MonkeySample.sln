@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonkeySample", "MonkeySample\MonkeySample.csproj", "{B9E899DA-FA48-445F-B886-777E76E8097D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLibrary", "..\..\source\TestLibrary\TestLibrary\TestLibrary.csproj", "{337BE668-C101-476C-9666-232B65801D77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{337BE668-C101-476C-9666-232B65801D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337BE668-C101-476C-9666-232B65801D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337BE668-C101-476C-9666-232B65801D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337BE668-C101-476C-9666-232B65801D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E899DA-FA48-445F-B886-777E76E8097D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E899DA-FA48-445F-B886-777E76E8097D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E899DA-FA48-445F-B886-777E76E8097D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E899DA-FA48-445F-B886-777E76E8097D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

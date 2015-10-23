@@ -65,6 +65,43 @@ namespace Cake.Xamarin
             });
         }
 
+
+        /// <summary>
+        /// Creates an archive of an app with MDTool
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="solutionFile">The solution file.</param>
+        /// <param name="projectName">The name of the project within the solution to archive.</param>
+        /// <param name="settings">The mdtool settings.</param>
+        [CakeMethodAlias]
+        public static void MDToolArchive (this ICakeContext context, FilePath solutionFile, string projectName, Action<MDToolSettings> settings)
+        {
+            var mds = new MDToolSettings ();
+
+            if (settings != null)
+                settings (mds);
+
+            iOSArchive (context, solutionFile, projectName, mds);
+        }
+
+        /// <summary>
+        /// Creates an archive of the Xamarin.iOS app
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="solutionFile">The solution file.</param>
+        /// <param name="projectName">The name of the project within the solution to archive.</param>
+        /// <param name="settings">The mdtool settings.</param>
+        [CakeMethodAlias]
+        public static void iOSArchive (this ICakeContext context, FilePath solutionFile, string projectName, Action<MDToolSettings> settings)
+        {
+            var mds = new MDToolSettings ();
+
+            if (settings != null)
+                settings (mds);
+
+            iOSArchive (context, solutionFile, projectName, mds);
+        }
+
         /// <summary>
         /// Creates an archive of the Xamarin.iOS app
         /// </summary>
@@ -91,6 +128,41 @@ namespace Cake.Xamarin
         public static void iOSBuild (this ICakeContext context, FilePath projectOrSolutionFile)
         {
             iOSBuild (context, projectOrSolutionFile, new MDToolSettings ());
+        }
+
+
+        /// <summary>
+        /// Builds a project with MDTool
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="projectOrSolutionFile">The project or solution file.</param>
+        /// <param name="settings">The mdtool settings.</param>
+        [CakeMethodAlias]
+        public static void MDToolBuild (this ICakeContext context, FilePath projectOrSolutionFile, Action<MDToolSettings> settings)
+        {
+            var mds = new MDToolSettings ();
+
+            if (settings != null)
+                settings (mds);
+
+            iOSBuild (context, projectOrSolutionFile, mds);
+        }
+
+        /// <summary>
+        /// Builds a Xamarin.iOS project
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="projectOrSolutionFile">The project or solution file.</param>
+        /// <param name="settings">The mdtool settings.</param>
+        [CakeMethodAlias]
+        public static void iOSBuild (this ICakeContext context, FilePath projectOrSolutionFile, Action<MDToolSettings> settings)
+        {
+            var mds = new MDToolSettings ();
+
+            if (settings != null)
+                settings (mds);
+            
+            iOSBuild (context, projectOrSolutionFile, mds);
         }
 
         /// <summary>
@@ -157,6 +229,32 @@ namespace Cake.Xamarin
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
             runner.Restore (solutionFile, settings);
+        }
+
+
+        /// <summary>
+        /// Packages the component for a given component YAML configuration file
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="componentYamlDirectory">The directory containing the component.yaml file.</param>
+        [CakeMethodAlias]
+        public static void PackageComponent (this ICakeContext context, DirectoryPath componentYamlDirectory)
+        {
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Package (componentYamlDirectory, new XamarinComponentSettings ());
+        }
+
+        /// <summary>
+        /// Packages the component for a given component YAML configuration file
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="componentYamlDirectory">The directory containing the component.yaml file.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void PackageComponent (this ICakeContext context, DirectoryPath componentYamlDirectory, XamarinComponentSettings settings)
+        {
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Package (componentYamlDirectory, settings);
         }
 
         /// <summary>

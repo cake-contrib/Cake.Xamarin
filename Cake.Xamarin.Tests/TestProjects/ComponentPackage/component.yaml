@@ -1,0 +1,13 @@
+version: 1.0.0.0
+name: Test Component
+id: testcomponent
+publisher: Xamarin
+publisher-url: "https://xamarin.com/"
+summary: "Just monkeying around here"
+libraries:
+  android: 
+    - ./output/TestLibrary.dll
+samples:
+  - name: "Monkey Sample"
+    path: ./samples/MonkeySample/MonkeySample.sln
+
