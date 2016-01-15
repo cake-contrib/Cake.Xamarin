@@ -7,7 +7,7 @@ using Cake.Core.Utilities;
 namespace Cake.Xamarin
 {
     /// <summary>
-    /// MD tool settings.
+    /// MDTool settings.
     /// </summary>
     public class MDToolSettings
     {
