@@ -25,14 +25,6 @@ namespace Cake.Xamarin.Tests
         {
             context.DumpLogs ();
         }
-
-        [Test]
-        public void iOSMSBuildTest ()
-        {
-            context.CakeContext.iOSMSBuild ("./TestProjects/HelloWorldiOS/HelloWorldiOS.sln");
-
-            Assert.IsTrue (context.CakeContext.FileSystem.Exist (new FilePath ("./TestProjects/HelloWorldiOS/HelloWorldiOS/bin/iPhoneSimulator/Debug/HelloWorldiOS.exe")));
-        }
     }
 
     [TestFixture, Category ("iOSTestsMacOnly")]
@@ -56,19 +48,20 @@ namespace Cake.Xamarin.Tests
         }
 
         [Test]
-        public void iOSBuildTest ()
+        public void MDToolBuildTest ()
         {
-            context.CakeContext.iOSBuild ("./TestProjects/HelloWorldiOS/HelloWorldiOS.sln");
+            context.CakeContext.MDToolBuild ("./TestProjects/HelloWorldiOS/HelloWorldiOS.sln");
 
             Assert.IsTrue (context.CakeContext.FileSystem.Exist (new FilePath ("./TestProjects/HelloWorldiOS/HelloWorldiOS/bin/iPhoneSimulator/Debug/HelloWorldiOS.exe")));
         }
 
         [Test]
-        public void iOSArchiveTest ()
+        public void MDToolArchiveTest ()
         {
-            context.CakeContext.iOSArchive ("./TestProjects/HelloWorldiOS/HelloWorldiOS.sln", "HelloWorldiOS");
+            context.CakeContext.MDToolArchive ("./TestProjects/HelloWorldiOS/HelloWorldiOS.sln", "HelloWorldiOS", s => {
+                s.Configuration = "Release|iPhone";
+            });
             Assert.IsTrue (context.CakeContext.FileSystem.Exist (new DirectoryPath ("./TestProjects/HelloWorldiOS/HelloWorldiOS/bin/iPhone/Release/HelloWorldiOS.app.dSYM")));
         }
     }
 }
-
