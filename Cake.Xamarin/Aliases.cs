@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Cake.Common.Tools;
-using Cake.Common.Tools.NUnit;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
+using Cake.Common.Tools;
+using Cake.Common.Tools.NUnit;
 
 namespace Cake.Xamarin
 {
