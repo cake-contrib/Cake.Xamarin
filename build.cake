@@ -18,7 +18,7 @@ Task ("nuget").IsDependentOn ("lib").Does (() =>
 		Verbosity = NuGetVerbosity.Detailed,
 		OutputDirectory = "./nupkg/",
 		// NuGet messes up path on mac, so let's add ./ in front again
-		BasePath = "././",
+		BasePath = "./",
 	});	
 });
 
