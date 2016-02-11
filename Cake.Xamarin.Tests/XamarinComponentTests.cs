@@ -40,7 +40,7 @@ namespace Cake.Xamarin.Tests
         {            
             var solutionFile = new FilePath ("./TestProjects/ComponentRestoreAndroid/ComponentRestoreAndroid.sln");
 
-            context.CakeContext.RestoreComponents (solutionFile, new XamarinComponentSettings {
+            context.CakeContext.RestoreComponents (solutionFile, new XamarinComponentRestoreSettings {
                 ToolPath = "./TestProjects/tools/xamarin-component.exe"
             });
 
