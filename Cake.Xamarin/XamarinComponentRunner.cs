@@ -33,10 +33,10 @@ namespace Cake.Xamarin
             builder.AppendQuoted (projectFile.MakeAbsolute (_cakeEnvironment).FullPath);
 
             if (!string.IsNullOrEmpty (settings.Email))
-                builder.Append ("user={0}", settings.Email);
+                builder.Append ("--user={0}", settings.Email);
 
             if (!string.IsNullOrEmpty (settings.Password))
-                builder.Append ("password={0}", settings.Password);
+                builder.Append ("--password={0}", settings.Password);
 
             Run (settings, builder, settings.ToolPath);
         }
@@ -59,10 +59,10 @@ namespace Cake.Xamarin
             builder.AppendQuoted (xamComponentFile.MakeAbsolute (_cakeEnvironment).FullPath);
 
             if (!string.IsNullOrEmpty (settings.Email))
-                builder.Append ("user={0}", settings.Email);
+                builder.Append ("--user={0}", settings.Email);
 
             if (!string.IsNullOrEmpty (settings.Password))
-                builder.Append ("password={0}", settings.Password);
+                builder.Append ("--password={0}", settings.Password);
 
             Run (settings, builder, settings.ToolPath);
         }
@@ -75,10 +75,10 @@ namespace Cake.Xamarin
             builder.AppendQuoted (xamComponentFile.MakeAbsolute (_cakeEnvironment).FullPath);
 
             if (!string.IsNullOrEmpty (settings.Email))
-                builder.Append ("user={0}", settings.Email);
+                builder.Append ("--user={0}", settings.Email);
 
             if (!string.IsNullOrEmpty (settings.Password))
-                builder.Append ("password={0}", settings.Password);
+                builder.Append ("--password={0}", settings.Password);
 
             Run (settings, builder, settings.ToolPath);
         }
