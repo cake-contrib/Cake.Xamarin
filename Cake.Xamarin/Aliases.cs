@@ -95,10 +95,10 @@ namespace Cake.Xamarin
         /// <param name="solutionFile">The project file.</param>
         /// <param name="settings">The xamarin-component.exe tool settings.</param>
         [CakeMethodAlias]
-        public static void RestoreComponents (this ICakeContext context, FilePath solutionFile, XamarinComponentSettings settings = null)
+        public static void RestoreComponents (this ICakeContext context, FilePath solutionFile, XamarinComponentRestoreSettings settings = null)
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Restore (solutionFile, settings ?? new XamarinComponentSettings ());
+            runner.Restore (solutionFile, settings ?? new XamarinComponentRestoreSettings ());
         }
 
         /// <summary>
@@ -112,6 +112,32 @@ namespace Cake.Xamarin
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
             runner.Package (componentYamlDirectory, settings ?? new XamarinComponentSettings ());
+        }
+
+        /// <summary>
+        /// Uploads a .xam component package which is a new version of an existing component in the store
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="xamComponentPackage">The .xam component package file.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void UploadComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentUploadSettings settings = null)
+        {
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Upload (xamComponentPackage, settings ?? new XamarinComponentUploadSettings ());
+        }
+
+        /// <summary>
+        /// Submits a .xam component package which is a brand new component on the store and has no previous versions
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="xamComponentPackage">The .xam component package file.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void SubmitComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentSubmitSettings settings = null)
+        {
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Submit (xamComponentPackage, settings ?? new XamarinComponentSubmitSettings ());
         }
 
         /// <summary>
