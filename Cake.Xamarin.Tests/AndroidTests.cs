@@ -67,7 +67,8 @@ namespace Cake.Xamarin.Tests
             }
             
             Assert.IsNotNull (apkFile);
-            Assert.IsNotNullOrEmpty (apkFile.FullPath);
+            Assert.IsNotNull (apkFile.FullPath);
+            Assert.IsNotEmpty (apkFile.FullPath);
             Assert.IsTrue (System.IO.File.Exists (apkFile.FullPath));
         }
     }
