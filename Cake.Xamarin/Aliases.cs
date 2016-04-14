@@ -4,8 +4,10 @@ using System.Linq;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
+using Cake.Common.IO;
 using Cake.Common.Tools;
 using Cake.Common.Tools.NUnit;
+using Cake.Common.Diagnostics;
 
 namespace Cake.Xamarin
 {
@@ -115,6 +117,28 @@ namespace Cake.Xamarin
         }
 
         /// <summary>
+        /// Finds and Uploads .xam component packages which match the globbing patterns
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="xamFileGlobbingPatterns">The globbing patterns to find .xam component package files with.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void UploadComponents (this ICakeContext context, XamarinComponentUploadSettings settings, params string[] xamFileGlobbingPatterns)
+        {
+            foreach (var pattern in xamFileGlobbingPatterns)
+            {
+                var files = context.GetFiles(pattern);
+                if (files == null || !files.Any())
+                    continue;
+
+                foreach (var file in files)
+                {
+                    UploadComponent(context, file, settings);
+                }
+            }
+        }
+
+        /// <summary>
         /// Uploads a .xam component package which is a new version of an existing component in the store
         /// </summary>
         /// <param name="context">The context.</param>
@@ -124,7 +148,52 @@ namespace Cake.Xamarin
         public static void UploadComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentUploadSettings settings = null)
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Upload (xamComponentPackage, settings ?? new XamarinComponentUploadSettings ());
+
+            int attempts = 0;
+            bool success = false;
+
+            while (attempts < settings.MaxAttempts)
+            {
+                attempts++;
+                try
+                {
+                    runner.Upload (xamComponentPackage, settings ?? new XamarinComponentUploadSettings ());
+                    success = true;
+                    break;
+                }
+                catch 
+                {
+                    context.Warning("Component Upload failed attempt #{0} of {1}", attempts, settings.MaxAttempts);
+                }
+            }
+
+            if (!success)
+            {
+                context.Error("Failed to upload {0}", "component");
+                throw new Exception("Failed to upload component");
+            }
+        }
+
+        /// <summary>
+        /// Finds and Submits .xam component packages which match the globbing patterns
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="xamFileGlobbingPatterns">The globbing patterns to find .xam component package files with.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void SubmitComponents (this ICakeContext context, XamarinComponentSubmitSettings settings, params string[] xamFileGlobbingPatterns)
+        {
+            foreach (var pattern in xamFileGlobbingPatterns)
+            {
+                var files = context.GetFiles(pattern);
+                if (files == null || !files.Any())
+                    continue;
+
+                foreach (var file in files)
+                {
+                    SubmitComponent(context, file, settings);
+                }
+            }
         }
 
         /// <summary>
@@ -137,7 +206,30 @@ namespace Cake.Xamarin
         public static void SubmitComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentSubmitSettings settings = null)
         {
             var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Submit (xamComponentPackage, settings ?? new XamarinComponentSubmitSettings ());
+
+            int attempts = 0;
+            bool success = false;
+
+            while (attempts < settings.MaxAttempts)
+            {
+                attempts++;
+                try
+                {
+                    runner.Submit (xamComponentPackage, settings ?? new XamarinComponentSubmitSettings ());
+                    success = true;
+                    break;
+                }
+                catch 
+                {
+                    context.Warning("Component Submit failed attempt #{0} of {1}", attempts, settings.MaxAttempts);
+                }
+            }
+
+            if (!success)
+            {
+                context.Error("Failed to submit {0}", "component");
+                throw new Exception("Failed to submit component");
+            }
         }
 
         /// <summary>

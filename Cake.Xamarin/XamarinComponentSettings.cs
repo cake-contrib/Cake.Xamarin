@@ -5,13 +5,8 @@ namespace Cake.Xamarin
     /// <summary>
     /// Xamarin component tool settings.
     /// </summary>
-    public class XamarinComponentSettings
+    public class XamarinComponentSettings : Cake.Core.Tooling.ToolSettings
     {
-        /// <summary>
-        /// Gets or sets the xamarin-component.exe path.
-        /// </summary>
-        /// <value>The path to xamarin-component.exe.</value>
-        public FilePath ToolPath { get; set; }
     }
 
     /// <summary>
@@ -44,6 +39,16 @@ namespace Cake.Xamarin
     /// </summary>
     public class XamarinComponentUploadSettings : XamarinComponentCredentialSettings
     {
+        public XamarinComponentUploadSettings () : base ()
+        {
+            MaxAttempts = 3;
+        }
+
+        /// <summary>
+        /// How many attempts should be made to upload the component before failing
+        /// </summary>
+        /// <value>The max attempts.</value>
+        public int MaxAttempts { get; set; }
     }
 
     /// <summary>
@@ -51,6 +56,16 @@ namespace Cake.Xamarin
     /// </summary>
     public class XamarinComponentSubmitSettings : XamarinComponentCredentialSettings
     {
+        public XamarinComponentSubmitSettings () : base ()
+        {
+            MaxAttempts = 3;
+        }
+
+        /// <summary>
+        /// How many attempts should be made to upload the component before failing
+        /// </summary>
+        /// <value>The max attempts.</value>
+        public int MaxAttempts { get; set; }
     }
 
 }
