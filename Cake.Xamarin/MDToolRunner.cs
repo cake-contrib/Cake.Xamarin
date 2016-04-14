@@ -9,22 +9,16 @@ namespace Cake.Xamarin
     /// <summary>
     /// MDTool settings.
     /// </summary>
-    public class MDToolSettings
+    public class MDToolSettings : Cake.Core.Tooling.ToolSettings
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Cake.Xamarin.MDToolSettings"/> class.
         /// </summary>
-        public MDToolSettings ()
+        public MDToolSettings () : base ()
         {
             Configuration = "Debug|iPhoneSimulator";
             Target = "Build";
         }
-
-        /// <summary>
-        /// Gets or sets the mdtool path.
-        /// </summary>
-        /// <value>The tool path.</value>
-        public FilePath ToolPath { get; set; }
 
         /// <summary>
         /// Adds the -v flag to the mdtool command.
@@ -45,7 +39,7 @@ namespace Cake.Xamarin
         public string Target { get; set; }
     }
 
-    internal class MDToolRunner : Tool<MDToolSettings>
+    internal class MDToolRunner : Cake.Core.Tooling.Tool<MDToolSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
@@ -82,7 +76,7 @@ namespace Cake.Xamarin
             builder.Append ("-c:\"" + settings.Configuration + "\"");
             builder.AppendQuoted (projectFile.MakeAbsolute (_cakeEnvironment).FullPath);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
 
         public void Archive (FilePath solutionFile, string projectName, MDToolSettings settings)
@@ -100,7 +94,7 @@ namespace Cake.Xamarin
             builder.Append ("-c:\"" + settings.Configuration + "\"");
             builder.AppendQuoted (solutionFile.MakeAbsolute (_cakeEnvironment).FullPath);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
     }
 }

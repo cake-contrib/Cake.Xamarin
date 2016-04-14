@@ -5,7 +5,7 @@ using Cake.Core.Utilities;
 
 namespace Cake.Xamarin
 {    
-    internal class XamarinComponentRunner : Tool<XamarinComponentSettings>
+    internal class XamarinComponentRunner : Cake.Core.Tooling.Tool<XamarinComponentSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
@@ -38,7 +38,7 @@ namespace Cake.Xamarin
             if (!string.IsNullOrEmpty (settings.Password))
                 builder.Append ("--password={0}", settings.Password);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
 
         public void Package (DirectoryPath componentYamlDirectory, XamarinComponentSettings settings)
@@ -48,7 +48,7 @@ namespace Cake.Xamarin
             builder.Append ("package");
             builder.AppendQuoted (componentYamlDirectory.MakeAbsolute (_cakeEnvironment).FullPath);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
 
         public void Upload (FilePath xamComponentFile, XamarinComponentUploadSettings settings)
@@ -64,7 +64,7 @@ namespace Cake.Xamarin
             if (!string.IsNullOrEmpty (settings.Password))
                 builder.Append ("--password={0}", settings.Password);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
 
         public void Submit (FilePath xamComponentFile, XamarinComponentSubmitSettings settings)
@@ -80,7 +80,7 @@ namespace Cake.Xamarin
             if (!string.IsNullOrEmpty (settings.Password))
                 builder.Append ("--password={0}", settings.Password);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
     }
 }

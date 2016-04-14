@@ -9,22 +9,16 @@ namespace Cake.Xamarin
     /// <summary>
     /// Test cloud settings.
     /// </summary>
-    public class TestCloudSettings 
+    public class TestCloudSettings : Cake.Core.Tooling.ToolSettings
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Cake.Xamarin.TestCloudSettings"/> class.
         /// </summary>
-        public TestCloudSettings ()
+        public TestCloudSettings () : base ()
         {
             Series = "master";
             Locale = "en-US";
         }
-
-        /// <summary>
-        /// Gets or sets the test-cloud.exe path.
-        /// </summary>
-        /// <value>The test-cloud.exe path.</value>
-        public FilePath ToolPath { get; set; }
 
         /// <summary>
         /// Gets or sets the series to test in the cloud.
@@ -39,7 +33,7 @@ namespace Cake.Xamarin
         public string Locale { get; set; }
     }
 
-    internal class TestCloudRunner : Tool<TestCloudSettings>
+    internal class TestCloudRunner : Cake.Core.Tooling.Tool<TestCloudSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
@@ -75,7 +69,7 @@ namespace Cake.Xamarin
             builder.Append ("--assembly-dir");
             builder.AppendQuoted (uitestAssemblies.MakeAbsolute (_cakeEnvironment).FullPath);
 
-            Run (settings, builder, settings.ToolPath);
+            Run (settings, builder);
         }
     }
 }
