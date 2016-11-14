@@ -73,6 +73,30 @@ namespace Cake.Xamarin
         /// </summary>
         /// <value>The optional name of the app to display in Test Cloud.</value>
         public string AppName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keystore file to explicitly use in test-cloud.
+        /// </summary>
+        /// <value>The keystore.</value>
+        public FilePath Keystore { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keystore password.
+        /// </summary>
+        /// <value>The keystore password.</value>
+        public string KeystorePassword { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keystore alias.
+        /// </summary>
+        /// <value>The keystore alias.</value>
+        public string KeystoreAlias { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keystore alias password.
+        /// </summary>
+        /// <value>The keystore alias password.</value>
+        public string KeystoreAliasPassword { get; set; }
     }
 
     internal class TestCloudRunner : Cake.Core.Tooling.Tool<TestCloudSettings>
@@ -102,6 +126,16 @@ namespace Cake.Xamarin
             builder.Append ("submit");
             builder.AppendQuoted (apkFile.MakeAbsolute (_cakeEnvironment).FullPath);
             builder.AppendQuotedSecret (apiKey);
+
+            if (settings.Keystore != null)
+            {
+                builder.Append("keystore");
+                builder.AppendQuoted(settings.Keystore.MakeAbsolute(_cakeEnvironment).FullPath);
+                builder.AppendQuoted(settings.KeystorePassword);
+                builder.AppendQuoted(settings.KeystoreAlias);
+                builder.AppendQuoted(settings.KeystoreAliasPassword);
+            }
+
             builder.Append ("--devices " + devicesHash);
             builder.Append ("--series " + settings.Series);
             builder.Append ("--locale");
