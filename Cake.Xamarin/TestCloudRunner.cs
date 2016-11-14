@@ -109,6 +109,7 @@ namespace Cake.Xamarin
             builder.Append ("--user");
             builder.AppendQuoted (userEmail);
             builder.Append ("--assembly-dir");
+            builder.AppendQuoted(uitestAssemblies.MakeAbsolute(_cakeEnvironment).FullPath);
 
             if (settings.NUnitXmlFile != null) {
                 builder.Append ("--nunit-xml");
@@ -143,8 +144,6 @@ namespace Cake.Xamarin
 
             if (settings.TestFixture)
                 builder.Append ("--test-fixture");
-            
-            builder.AppendQuoted (uitestAssemblies.MakeAbsolute (_cakeEnvironment).FullPath);
 
             Run (settings, builder);
         }
