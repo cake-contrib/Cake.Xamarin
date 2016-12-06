@@ -49,7 +49,7 @@ namespace Cake.Xamarin
             // Use the globber to find any .apk files within the tree
             return context.Globber
                 .GetFiles (searchPattern)
-                .OrderBy (f => new FileInfo (f.FullPath).LastWriteTimeUtc)
+                .OrderByDescending (f => new FileInfo (f.FullPath).LastWriteTimeUtc)
                 .FirstOrDefault ();            
         }
 
