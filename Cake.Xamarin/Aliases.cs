@@ -91,6 +91,18 @@ namespace Cake.Xamarin
         }
 
         /// <summary>
+        /// Gets a runner for invoking the Xamarin Studio Add-in Setup Utility.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns>A setup utility runner.</returns>
+        [CakePropertyAlias]
+        public static MDToolSetupRunner MDToolSetup (this ICakeContext context)
+        {
+            var runner = new MDToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            return runner;
+        }
+
+        /// <summary>
         /// Restores Xamarin Components for a given project
         /// </summary>
         /// <param name="context">The context.</param>
