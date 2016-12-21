@@ -33,6 +33,9 @@ namespace Cake.Xamarin
         protected override IEnumerable<string> GetToolExecutableNames()
         {
             yield return "mdtool";
+            yield return "mdtool.exe";
+            yield return "mdtool.cmd";
+            yield return "mdtool.sh";
         }
 
         /// <summary>
