@@ -4,32 +4,15 @@ using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using System.Collections.Generic;
-using Cake.Xamarin.Tests.Fakes;
+using Cake.Xamarin.Fakes;
 using Cake.Xamarin;
 using Cake.Common.IO;
 
 namespace Cake.Xamarin.Tests
 {
     [TestFixture, Category ("AndroidTests")]
-    public class AndroidTests
+    public class AndroidTests : TestFixtureBase
     {
-        FakeCakeContext context;
-
-        [SetUp]
-        public void Setup ()
-        {
-            context = new FakeCakeContext ();
-
-            context.CakeContext.CleanDirectories ("./TestProjects/**/bin");
-            context.CakeContext.CleanDirectories ("./TestProjects/**/obj");
-        }
-
-        [TearDown]
-        public void Teardown ()
-        {
-            context.DumpLogs ();
-        }
-
         [Test]
         public void AndroidPackageSignedTest ()
         {
@@ -44,7 +27,7 @@ namespace Cake.Xamarin.Tests
 
         void androidPackageTest (bool signed)
         {                        
-            var projectFile = context.WorkingDirectory
+            var projectFile = base.WorkingDirectory
                 .Combine ("TestProjects/HelloWorldAndroid/HelloWorldAndroid/")
                 .CombineWithFilePath ("HelloWorldAndroid.csproj");
 
@@ -52,20 +35,14 @@ namespace Cake.Xamarin.Tests
 
             FilePath apkFile = null;
 
-            try {
-                apkFile = context.CakeContext.AndroidPackage(
-                    projectFile,
-                    signed,
-                    c => {
-                        c.Verbosity = Verbosity.Diagnostic;
-                        c.Configuration = "Release";
-                    });
-            } catch (Exception ex) {
-                Console.WriteLine(ex);
-                context.DumpLogs();
-                Assert.Fail(context.GetLogs());
-            }
-            
+            apkFile = Cake.AndroidPackage(
+                projectFile,
+                signed,
+                c => {
+                    c.Verbosity = Verbosity.Diagnostic;
+                    c.Configuration = "Release";
+                });
+
             Assert.IsNotNull (apkFile);
             Assert.IsNotNull (apkFile.FullPath);
             Assert.IsNotEmpty (apkFile.FullPath);
