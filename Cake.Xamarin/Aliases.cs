@@ -68,7 +68,7 @@ namespace Cake.Xamarin
             if (settings != null)
                 settings (mds);
 
-            var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Archive (solutionFile, projectName, mds);
         }
 
@@ -86,7 +86,7 @@ namespace Cake.Xamarin
             if (settings != null)
                 settings (mds);
 
-            var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Build (projectOrSolutionFile, mds);
         }
 
@@ -98,7 +98,7 @@ namespace Cake.Xamarin
         [CakePropertyAlias]
         public static MDToolSetupRunner MDToolSetup (this ICakeContext context)
         {
-            var runner = new MDToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new MDToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner;
         }
 
@@ -111,7 +111,7 @@ namespace Cake.Xamarin
         [CakeMethodAlias]
         public static void RestoreComponents (this ICakeContext context, FilePath solutionFile, XamarinComponentRestoreSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Restore (solutionFile, settings ?? new XamarinComponentRestoreSettings ());
         }
 
@@ -124,7 +124,7 @@ namespace Cake.Xamarin
         [CakeMethodAlias]
         public static void PackageComponent (this ICakeContext context, DirectoryPath componentYamlDirectory, XamarinComponentSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Package (componentYamlDirectory, settings ?? new XamarinComponentSettings ());
         }
 
@@ -159,7 +159,7 @@ namespace Cake.Xamarin
         [CakeMethodAlias]
         public static void UploadComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentUploadSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
 
             int attempts = 0;
             bool success = false;
@@ -217,7 +217,7 @@ namespace Cake.Xamarin
         [CakeMethodAlias]
         public static void SubmitComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentSubmitSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
 
             int attempts = 0;
             bool success = false;
@@ -270,7 +270,7 @@ namespace Cake.Xamarin
         [CakeMethodAlias]
         public static void TestCloud (this ICakeContext context, FilePath apkFile, string apiKey, string devicesHash, string userEmail, DirectoryPath uitestsAssemblies, TestCloudSettings settings = null)
         {
-            var runner = new TestCloudRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new TestCloudRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run (apkFile, apiKey, devicesHash, userEmail, uitestsAssemblies, settings ?? new TestCloudSettings ());
         }
     }

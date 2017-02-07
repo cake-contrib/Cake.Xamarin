@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cake.Core;
 using Cake.Core.IO;
+using Cake.Core.Tooling;
 using Cake.Core.Utilities;
 
 namespace Cake.Xamarin
@@ -9,8 +10,8 @@ namespace Cake.Xamarin
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
-        public XamarinComponentRunner (IFileSystem fileSystem, ICakeEnvironment cakeEnvironment, IProcessRunner processRunner, IGlobber globber) 
-            : base (fileSystem, cakeEnvironment, processRunner, globber)
+        public XamarinComponentRunner (IFileSystem fileSystem, ICakeEnvironment cakeEnvironment, IProcessRunner processRunner, IToolLocator tools) 
+            : base (fileSystem, cakeEnvironment, processRunner, tools)
         {
             _cakeEnvironment = cakeEnvironment;
         }

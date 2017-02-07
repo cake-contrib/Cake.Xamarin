@@ -3,6 +3,7 @@ using Cake.Core.IO;
 using Cake.Core.Utilities;
 using Cake.Core;
 using System.Collections.Generic;
+using Cake.Core.Tooling;
 
 namespace Cake.Xamarin
 {
@@ -103,8 +104,8 @@ namespace Cake.Xamarin
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
-        public TestCloudRunner (IFileSystem fileSystem, ICakeEnvironment cakeEnvironment, IProcessRunner processRunner, IGlobber globber) 
-            : base (fileSystem, cakeEnvironment, processRunner, globber)
+        public TestCloudRunner (IFileSystem fileSystem, ICakeEnvironment cakeEnvironment, IProcessRunner processRunner, IToolLocator tools) 
+            : base (fileSystem, cakeEnvironment, processRunner, tools)
         {
             _cakeEnvironment = cakeEnvironment;
         }

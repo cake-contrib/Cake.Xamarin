@@ -39,6 +39,9 @@ namespace Cake.Xamarin
     /// </summary>
     public class XamarinComponentUploadSettings : XamarinComponentCredentialSettings
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Cake.Xamarin.XamarinComponentUploadSettings"/> class.
+        /// </summary>
         public XamarinComponentUploadSettings () : base ()
         {
             MaxAttempts = 3;
@@ -56,6 +59,9 @@ namespace Cake.Xamarin
     /// </summary>
     public class XamarinComponentSubmitSettings : XamarinComponentCredentialSettings
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Cake.Xamarin.XamarinComponentSubmitSettings"/> class.
+       /// </summary>
         public XamarinComponentSubmitSettings () : base ()
         {
             MaxAttempts = 3;
