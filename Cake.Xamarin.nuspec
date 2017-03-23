@@ -12,13 +12,11 @@
       <projectUrl>https://github.com/Redth/Cake.Xamarin</projectUrl>
       <iconUrl>https://raw.githubusercontent.com/Redth/Cake.Xamarin/master/icon.png</iconUrl>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <copyright>Copyright (c) Redth 2015-2016</copyright>
+      <copyright>Copyright (c) Redth 2015-2017</copyright>
       <releaseNotes>Initial Release</releaseNotes>
       <tags>Cake Script Build Xamarin</tags>
 
       <dependencies>
-         <dependency id="Cake.Core" version="0.7.0" />
-         <dependency id="Cake.Common" version="0.7.0" />
       </dependencies>
    </metadata>
 
