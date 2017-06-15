@@ -98,13 +98,19 @@ namespace Cake.Xamarin
         /// </summary>
         /// <value>The keystore alias password.</value>
         public string KeystoreAliasPassword { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether this Tests process should be attached until completion
+        /// </summary>
+        /// <value><c>true</c> if process should remain attached; otherwise, <c>false</c>.</value>
+        public bool Async { get; set; }
     }
 
     internal class TestCloudRunner : Cake.Core.Tooling.Tool<TestCloudSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
-        public TestCloudRunner (IFileSystem fileSystem, ICakeEnvironment cakeEnvironment, IProcessRunner processRunner, IToolLocator tools) 
+        public TestCloudRunner (IFileSystem fileSystem, ICakeEnvironment cakeEnvironment, IProcessRunner processRunner, IToolLocator tools)
             : base (fileSystem, cakeEnvironment, processRunner, tools)
         {
             _cakeEnvironment = cakeEnvironment;
@@ -179,6 +185,9 @@ namespace Cake.Xamarin
 
             if (settings.TestFixture)
                 builder.Append ("--test-fixture");
+
+            if (settings.Async)
+                builder.Append ("--async");
 
             Run (settings, builder);
         }
