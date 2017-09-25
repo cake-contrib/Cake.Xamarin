@@ -13,13 +13,13 @@ namespace Cake.Xamarin.Tests
     [Trait ("Category", "AndroidTests")]
     public class AndroidTests : TestFixtureBase
     {
-        [Fact]
+        //[Fact]
         public void AndroidPackageSignedTest ()
         {
             androidPackageTest (true);
         }
 
-        [Fact]
+        //[Fact]
         public void AndroidPackageUnsignedTest ()
         {
             androidPackageTest (false);
