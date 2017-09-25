@@ -11,7 +11,7 @@ namespace Cake.Xamarin.Tests
     [Trait ("Category", "TestCloudTests")]
     public class TestCloudTests : Fakes.TestFixtureBase
     {
-        [Fact]
+        //[Fact]
         public void UITestsTest ()
         {
             Cake.NuGetRestore ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");
@@ -36,7 +36,7 @@ namespace Cake.Xamarin.Tests
                 });
         }
 
-        [Fact]
+        //[Fact]
         public void TestCloudTest ()
         {
             Cake.NuGetRestore ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");

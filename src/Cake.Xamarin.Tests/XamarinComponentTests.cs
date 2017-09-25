@@ -24,7 +24,7 @@ namespace Cake.Xamarin.Tests
             }
         }
 
-        [Fact]
+        //[Fact]
         public void RestoreComponentAndroidTest ()
         {            
             var solutionFile = new FilePath ("./TestProjects/ComponentRestoreAndroid/ComponentRestoreAndroid.sln");
@@ -38,7 +38,7 @@ namespace Cake.Xamarin.Tests
             Assert.True (Cake.FileSystem.Exist (componentLib));
         }
 
-        [Fact]
+        //[Fact]
         public void PackageComponentTest ()
         {
             var yaml = new DirectoryPath ("./TestProjects/ComponentPackage/");
