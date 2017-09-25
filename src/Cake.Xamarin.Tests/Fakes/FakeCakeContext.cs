@@ -15,8 +15,7 @@ namespace Cake.Xamarin.Fakes
 
 		public FakeCakeContext()
 		{
-			testsDir = new DirectoryPath(
-				System.IO.Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory));
+			testsDir = new DirectoryPath(System.IO.Path.GetFullPath(AppContext.BaseDirectory));
 
 			log = new FakeCakeLog();
 			var fileSystem = new FileSystem();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
@@ -8,6 +9,7 @@ namespace Cake.Xamarin
     /// <summary>
     /// A wrapper around the Xamarin Studio Add-in Setup Utility (<c>mdtool setup</c>).
     /// </summary>
+    [Obsolete ("Use VSToolSetupRunner instead.")]
     public class MDToolSetupRunner : Tool<MDToolSetupSettings>
     {
         private readonly ICakeEnvironment _environment;

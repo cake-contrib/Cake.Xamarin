@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using System;
 using Cake.Core;
 using Cake.Core.Diagnostics;
@@ -10,16 +10,16 @@ using Cake.Common.IO;
 
 namespace Cake.Xamarin.Tests
 {
-    [TestFixture, Category ("AndroidTests")]
+    [Trait ("Category", "AndroidTests")]
     public class AndroidTests : TestFixtureBase
     {
-        [Test]
+        [Fact]
         public void AndroidPackageSignedTest ()
         {
             androidPackageTest (true);
         }
 
-        [Test]
+        [Fact]
         public void AndroidPackageUnsignedTest ()
         {
             androidPackageTest (false);
@@ -43,10 +43,10 @@ namespace Cake.Xamarin.Tests
                     c.Configuration = "Release";
                 });
 
-            Assert.IsNotNull (apkFile);
-            Assert.IsNotNull (apkFile.FullPath);
-            Assert.IsNotEmpty (apkFile.FullPath);
-            Assert.IsTrue (System.IO.File.Exists (apkFile.FullPath));
+            Assert.NotNull (apkFile);
+            Assert.NotNull (apkFile.FullPath);
+            Assert.NotEmpty (apkFile.FullPath);
+            Assert.True (System.IO.File.Exists (apkFile.FullPath));
         }
     }
 }

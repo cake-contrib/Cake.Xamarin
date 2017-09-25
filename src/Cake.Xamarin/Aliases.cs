@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Xml.XPath;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
@@ -8,6 +10,9 @@ using Cake.Common.IO;
 using Cake.Common.Tools;
 using Cake.Common.Tools.NUnit;
 using Cake.Common.Diagnostics;
+using Cake.Common.Tools.MSBuild;
+using System.Xml;
+using System.Collections.Generic;
 
 namespace Cake.Xamarin
 {
@@ -18,9 +23,12 @@ namespace Cake.Xamarin
     public static class XamarinAliases
     {
         internal const string DEFAULT_MDTOOL_PATH = "/Applications/Xamarin Studio.app/Contents/MacOS/mdtool";
+        internal const string DEFAULT_VSTOOL_PATH = "/Applications/Visual Studio.app/Contents/MacOS/vstool";
 
         /// <summary>
-        /// Creates an android .APK package file
+        /// DEPRECATED: Creates an android .APK package file
+        /// Use the MSBuild target `SignAndroidPackage` instead.
+        /// See documentation for more info: https://developer.xamarin.com/guides/android/under_the_hood/build_process/#Build_Targets
         /// </summary>
         /// <returns>The file path of the .APK which was created (all subfolders of the project file specified are searched for .apk files and the newest one found is returned).</returns>
         /// <param name="context">The context.</param>
@@ -28,6 +36,7 @@ namespace Cake.Xamarin
         /// <param name="sign">Will create a signed .APK file if set to <c>true</c> based on the signing settings in the .CSPROJ, otherwise the .APK will be unsigned.</param>
         /// <param name="configurator">The settings configurator.</param>
         [CakeMethodAlias]
+        [Obsolete ("Use MSBuild with the `SignAndroidPackage` or `PackageForAndroid` target instead.  See https://developer.xamarin.com/guides/android/under_the_hood/build_process/#Build_Targets for more information")]
         public static FilePath AndroidPackage (this ICakeContext context, FilePath projectFile, bool sign = false, Action<DotNetBuildSettings> configurator = null)
         {
             var target = sign ? "SignAndroidPackage" : "PackageForAndroid";
@@ -39,10 +48,9 @@ namespace Cake.Xamarin
                 c.Configuration = "Release";        
                 c.Targets.Add (target);
 
-                // Pass along configuration to user for further changes
-                if (configurator != null)
-                    configurator (c);
-            });
+				// Pass along configuration to user for further changes
+				configurator?.Invoke(c);
+			});
 
             var searchPattern = projectFile.GetDirectory () + (sign ? "/**/*-Signed.apk" : "/**/*.apk");
 
@@ -54,13 +62,16 @@ namespace Cake.Xamarin
         }
 
         /// <summary>
-        /// Creates an archive of an app with MDTool
+        /// DEPRECATED: Creates an archive of an app with MDTool
+        /// Change your project settings to output an IPA file, and use the MSBuild to build.
+        /// See documentation for more info: https://developer.xamarin.com/guides/ios/deployment,_testing,_and_metrics/app_distribution/ipa_support/#Building_via_the_Command_Line_On_Mac
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="solutionFile">The solution file.</param>
         /// <param name="projectName">The name of the project within the solution to archive.</param>
         /// <param name="settings">The mdtool settings.</param>
         [CakeMethodAlias]
+		[Obsolete("Use MSBuild instead (and configure your iOS project to generate an ipa file on build.  See https://developer.xamarin.com/guides/ios/deployment,_testing,_and_metrics/app_distribution/ipa_support/#Building_via_the_Command_Line_On_Mac for more information")]
         public static void MDToolArchive (this ICakeContext context, FilePath solutionFile, string projectName, Action<MDToolSettings> settings = null)
         {
             var mds = new MDToolSettings ();
@@ -73,12 +84,14 @@ namespace Cake.Xamarin
         }
 
         /// <summary>
-        /// Builds a project with MDTool
+        /// DEPRECATED: Builds a project with MDTool
+        /// Use MSBuild instead.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="projectOrSolutionFile">The project or solution file.</param>
         /// <param name="settings">The mdtool settings.</param>
         [CakeMethodAlias]
+        [Obsolete("Use MSBuild instead.")]
         public static void MDToolBuild (this ICakeContext context, FilePath projectOrSolutionFile, Action<MDToolSettings> settings = null)
         {
             var mds = new MDToolSettings ();
@@ -96,11 +109,24 @@ namespace Cake.Xamarin
         /// <param name="context">The context.</param>
         /// <returns>A setup utility runner.</returns>
         [CakePropertyAlias]
+		[Obsolete("Use VSToolSetupRunner instead.")]
         public static MDToolSetupRunner MDToolSetup (this ICakeContext context)
         {
             var runner = new MDToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner;
         }
+
+		/// <summary>
+		/// Gets a runner for invoking the Visual Studio Mac Add-in Setup Utility.
+		/// </summary>
+		/// <param name="context">The context.</param>
+		/// <returns>A setup utility runner.</returns>
+		[CakePropertyAlias]
+		public static VSToolSetupRunner VSToolSetup(this ICakeContext context)
+		{
+			var runner = new VSToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+			return runner;
+		}
 
         /// <summary>
         /// Restores Xamarin Components for a given project
@@ -274,4 +300,16 @@ namespace Cake.Xamarin
             runner.Run (apkFile, apiKey, devicesHash, userEmail, uitestsAssemblies, settings ?? new TestCloudSettings ());
         }
     }
+
+	/// <summary>
+	/// Common project type GUID values for Xamarin projects.
+	/// </summary>
+	public static class CommonProjectTypeGuids
+	{
+		public const string XamarinAndroid 			= "{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}";
+		public const string XamarinAndroidBinding 	= "{10368E6C-D01B-4462-8E8B-01FC667A7035}";
+
+		public const string XamariniOS 				= "{FEACFBD2-3405-455C-9665-78FE426C6842}";
+		public const string XamariniOSBinding 		= "{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC}";
+	}
 }

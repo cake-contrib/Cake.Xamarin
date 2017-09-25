@@ -1,17 +1,17 @@
 ﻿using System;
-using NUnit.Framework;
 using Cake.Common.IO;
 using Cake.Common.Tools.NuGet;
 using Cake.Common.Tools;
 using System.Linq;
 using Cake.Common.Text;
+using Xunit;
 
 namespace Cake.Xamarin.Tests
 {
-    [TestFixture, Category ("TestCloudTests")]
+    [Trait ("Category", "TestCloudTests")]
     public class TestCloudTests : Fakes.TestFixtureBase
     {
-        [Test]
+        [Fact]
         public void UITestsTest ()
         {
             Cake.NuGetRestore ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");
@@ -36,7 +36,7 @@ namespace Cake.Xamarin.Tests
                 });
         }
 
-        [Test]
+        [Fact]
         public void TestCloudTest ()
         {
             Cake.NuGetRestore ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");

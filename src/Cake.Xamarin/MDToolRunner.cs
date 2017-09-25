@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Cake.Core;
@@ -10,6 +11,7 @@ namespace Cake.Xamarin
     /// <summary>
     /// MDTool settings.
     /// </summary>
+    [Obsolete]
     public class MDToolSettings : Cake.Core.Tooling.ToolSettings
     {
         /// <summary>

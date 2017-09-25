@@ -9,3 +9,5 @@ nupkg/
 .nugetapikey
 xtc-api-key
 xtc-email
+BuildArtifacts/
+.vs/

@@ -2,21 +2,19 @@
 using Cake.Core;
 using Cake.Core.IO;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 using Cake.Xamarin;
 using Cake.Common.Net;
 using Cake.Common.IO;
 
 namespace Cake.Xamarin.Tests
 {
-    [TestFixture, Category ("XamarinComponentTests")]
+    [Trait("Category", "XamarinComponentTests")]
     public class XamarinComponentTests : Fakes.TestFixtureBase
     {
-        [SetUp]
-        public override void Setup ()
+        public XamarinComponentTests ()
+            : base ()
         {
-			base.Setup();
-
             Cake.DeleteFiles ("./TestProjects/ComponentPackage/*.xam");
 
             if (!Cake.FileSystem.Exist (new FilePath ("./TestProjects/tools/xamarin-component.exe"))) {
@@ -26,7 +24,7 @@ namespace Cake.Xamarin.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void RestoreComponentAndroidTest ()
         {            
             var solutionFile = new FilePath ("./TestProjects/ComponentRestoreAndroid/ComponentRestoreAndroid.sln");
@@ -37,10 +35,10 @@ namespace Cake.Xamarin.Tests
 
             var componentLib = new FilePath ("./TestProjects/ComponentRestoreAndroid/Components/AndHUD-1.3.1/lib/android/AndHUD.dll");
 
-            Assert.IsTrue (Cake.FileSystem.Exist (componentLib));
+            Assert.True (Cake.FileSystem.Exist (componentLib));
         }
 
-        [Test]
+        [Fact]
         public void PackageComponentTest ()
         {
             var yaml = new DirectoryPath ("./TestProjects/ComponentPackage/");
@@ -49,7 +47,7 @@ namespace Cake.Xamarin.Tests
                 ToolPath = "./TestProjects/tools/xamarin-component.exe"
             });
 
-            Assert.IsTrue (Cake.FileExists ("./TestProjects/ComponentPackage/testcomponent-1.0.0.0.xam"));
+            Assert.True (Cake.FileExists ("./TestProjects/ComponentPackage/testcomponent-1.0.0.0.xam"));
         }
     }
 }
