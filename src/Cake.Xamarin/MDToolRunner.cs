@@ -11,7 +11,6 @@ namespace Cake.Xamarin
     /// <summary>
     /// MDTool settings.
     /// </summary>
-    [Obsolete]
     public class MDToolSettings : Cake.Core.Tooling.ToolSettings
     {
         /// <summary>
