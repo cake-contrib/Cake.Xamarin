@@ -178,7 +178,7 @@ namespace Cake.Xamarin
                 builder.Append ("--test-chunk");
 
             if (settings.TestFixture)
-                builder.Append ("--test-fixture");
+                builder.Append ("--fixture-chunk");
 
             Run (settings, builder);
         }
