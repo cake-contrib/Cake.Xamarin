@@ -29,13 +29,22 @@
     <DocumentationFile>bin\Release\Cake.Xamarin.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cake.Common, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cake.Common.0.26.0\lib\net46\Cake.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Cake.Core, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cake.Core.0.26.0\lib\net46\Cake.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="Cake.Core">
-      <HintPath>..\packages\Cake.Core.0.22.2\lib\net46\Cake.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Cake.Common">
-      <HintPath>..\packages\Cake.Common.0.22.2\lib\net46\Cake.Common.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Json" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MDToolSetupRunner.cs" />
