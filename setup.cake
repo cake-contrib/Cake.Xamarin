@@ -10,8 +10,12 @@ BuildParameters.SetParameters(context: Context,
                             repositoryName: "Cake.Xamarin",
                             appVeyorAccountName: "redth",
                             shouldRunDotNetCorePack: true,
+                            shouldRunInspectCode: false,
+                            shouldRunDotNetCorePack: true,
                             shouldRunDupFinder: false,
-                            shouldRunInspectCode: false);
+                            shouldRunCodecov: false,
+                            shouldPostToSlack: false,
+                            shouldRunIntegrationTests: false);
 
 BuildParameters.PrintParameters(Context);
 
