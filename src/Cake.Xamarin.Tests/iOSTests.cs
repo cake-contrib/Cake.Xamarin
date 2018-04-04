@@ -9,7 +9,7 @@ namespace Cake.Xamarin.Tests
     [Trait ("Category", "iOSTests")]
     public class iOSTests : Fakes.TestFixtureBase
     {
-        [Fact]
+        //[Fact]
         public void IpaTests()
         {
             var projectFile = new FilePath("./TestProjects/HelloWorldiOS/HelloWorldiOS/HelloWorldiOS.csproj");
