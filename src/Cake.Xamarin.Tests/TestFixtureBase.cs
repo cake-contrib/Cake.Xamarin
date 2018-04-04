@@ -20,7 +20,7 @@ namespace Cake.Xamarin.Fakes
 		public TestFixtureBase()
 		{
 			context = new FakeCakeContext();
-			context.CakeContext.Environment.WorkingDirectory = System.IO.Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..");
+			context.CakeContext.Environment.WorkingDirectory = System.IO.Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "..", "..");
 
 			context.CakeContext.CleanDirectories("./TestProjects/**/bin");
 			context.CakeContext.CleanDirectories("./TestProjects/**/obj");

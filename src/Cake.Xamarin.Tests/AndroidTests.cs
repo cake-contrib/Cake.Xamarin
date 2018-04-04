@@ -27,20 +27,14 @@ namespace Cake.Xamarin.Tests
 
         void androidPackageTest (bool signed)
         {                        
-            var projectFile = base.WorkingDirectory
-                .Combine ("TestProjects/HelloWorldAndroid/HelloWorldAndroid/")
-                .CombineWithFilePath ("HelloWorldAndroid.csproj");
+            var projectFile = new FilePath ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj");
 
-            projectFile = new FilePath ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj");
-
-            FilePath apkFile = null;
-
-            apkFile = Cake.AndroidPackage(
+            var apkFile = Cake.BuildAndroidApk(
                 projectFile,
                 signed,
+                "Release",
                 c => {
                     c.Verbosity = Verbosity.Diagnostic;
-                    c.Configuration = "Release";
                 });
 
             Assert.NotNull (apkFile);

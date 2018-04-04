@@ -22,111 +22,19 @@ namespace Cake.Xamarin
     [CakeAliasCategory("Xamarin")]
     public static class XamarinAliases
     {
-        internal const string DEFAULT_MDTOOL_PATH = "/Applications/Xamarin Studio.app/Contents/MacOS/mdtool";
         internal const string DEFAULT_VSTOOL_PATH = "/Applications/Visual Studio.app/Contents/MacOS/vstool";
 
         /// <summary>
-        /// DEPRECATED: Creates an android .APK package file
-        /// Use the MSBuild target `SignAndroidPackage` instead.
-        /// See documentation for more info: https://developer.xamarin.com/guides/android/under_the_hood/build_process/#Build_Targets
-        /// </summary>
-        /// <returns>The file path of the .APK which was created (all subfolders of the project file specified are searched for .apk files and the newest one found is returned).</returns>
-        /// <param name="context">The context.</param>
-        /// <param name="projectFile">The .CSPROJ file to build from.</param>
-        /// <param name="sign">Will create a signed .APK file if set to <c>true</c> based on the signing settings in the .CSPROJ, otherwise the .APK will be unsigned.</param>
-        /// <param name="configurator">The settings configurator.</param>
-        [CakeMethodAlias]
-        [Obsolete ("Use MSBuild with the `SignAndroidPackage` or `PackageForAndroid` target instead.  See https://developer.xamarin.com/guides/android/under_the_hood/build_process/#Build_Targets for more information")]
-        public static FilePath AndroidPackage (this ICakeContext context, FilePath projectFile, bool sign = false, Action<DotNetBuildSettings> configurator = null)
-        {
-            var target = sign ? "SignAndroidPackage" : "PackageForAndroid";
-
-            if (!context.FileSystem.Exist (projectFile))
-                throw new CakeException ("Project File Not Found: " + projectFile.FullPath);
-            
-            context.DotNetBuild (projectFile, c => {
-                c.Configuration = "Release";        
-                c.Targets.Add (target);
-
-				// Pass along configuration to user for further changes
-				configurator?.Invoke(c);
-			});
-
-            var searchPattern = projectFile.GetDirectory () + (sign ? "/**/*-Signed.apk" : "/**/*.apk");
-
-            // Use the globber to find any .apk files within the tree
-            return context.Globber
-                .GetFiles (searchPattern)
-                .OrderByDescending (f => new FileInfo (f.FullPath).LastWriteTimeUtc)
-                .FirstOrDefault ();            
-        }
-
-        /// <summary>
-        /// DEPRECATED: Creates an archive of an app with MDTool
-        /// Change your project settings to output an IPA file, and use the MSBuild to build.
-        /// See documentation for more info: https://developer.xamarin.com/guides/ios/deployment,_testing,_and_metrics/app_distribution/ipa_support/#Building_via_the_Command_Line_On_Mac
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <param name="solutionFile">The solution file.</param>
-        /// <param name="projectName">The name of the project within the solution to archive.</param>
-        /// <param name="settings">The mdtool settings.</param>
-        [CakeMethodAlias]
-		[Obsolete("Use MSBuild instead (and configure your iOS project to generate an ipa file on build.  See https://developer.xamarin.com/guides/ios/deployment,_testing,_and_metrics/app_distribution/ipa_support/#Building_via_the_Command_Line_On_Mac for more information")]
-        public static void MDToolArchive (this ICakeContext context, FilePath solutionFile, string projectName, Action<MDToolSettings> settings = null)
-        {
-            var mds = new MDToolSettings ();
-
-            if (settings != null)
-                settings (mds);
-
-            var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Archive (solutionFile, projectName, mds);
-        }
-
-        /// <summary>
-        /// DEPRECATED: Builds a project with MDTool
-        /// Use MSBuild instead.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <param name="projectOrSolutionFile">The project or solution file.</param>
-        /// <param name="settings">The mdtool settings.</param>
-        [CakeMethodAlias]
-        [Obsolete("Use MSBuild instead.")]
-        public static void MDToolBuild (this ICakeContext context, FilePath projectOrSolutionFile, Action<MDToolSettings> settings = null)
-        {
-            var mds = new MDToolSettings ();
-
-            if (settings != null)
-                settings (mds);
-
-            var runner = new MDToolRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Build (projectOrSolutionFile, mds);
-        }
-
-        /// <summary>
-        /// Gets a runner for invoking the Xamarin Studio Add-in Setup Utility.
+        /// Gets a runner for invoking the Visual Studio Mac Add-in Setup Utility.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns>A setup utility runner.</returns>
         [CakePropertyAlias]
-		[Obsolete("Use VSToolSetupRunner instead.")]
-        public static MDToolSetupRunner MDToolSetup (this ICakeContext context)
+        public static VSToolSetupRunner VSToolSetup(this ICakeContext context)
         {
-            var runner = new MDToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new VSToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner;
         }
-
-		/// <summary>
-		/// Gets a runner for invoking the Visual Studio Mac Add-in Setup Utility.
-		/// </summary>
-		/// <param name="context">The context.</param>
-		/// <returns>A setup utility runner.</returns>
-		[CakePropertyAlias]
-		public static VSToolSetupRunner VSToolSetup(this ICakeContext context)
-		{
-			var runner = new VSToolSetupRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-			return runner;
-		}
 
         /// <summary>
         /// Restores Xamarin Components for a given project
@@ -135,10 +43,10 @@ namespace Cake.Xamarin
         /// <param name="solutionFile">The project file.</param>
         /// <param name="settings">The xamarin-component.exe tool settings.</param>
         [CakeMethodAlias]
-        public static void RestoreComponents (this ICakeContext context, FilePath solutionFile, XamarinComponentRestoreSettings settings = null)
+        public static void RestoreComponents(this ICakeContext context, FilePath solutionFile, XamarinComponentRestoreSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Restore (solutionFile, settings ?? new XamarinComponentRestoreSettings ());
+            var runner = new XamarinComponentRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Restore(solutionFile, settings ?? new XamarinComponentRestoreSettings());
         }
 
         /// <summary>
@@ -148,10 +56,10 @@ namespace Cake.Xamarin
         /// <param name="componentYamlDirectory">The directory containing the component.yaml file.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void PackageComponent (this ICakeContext context, DirectoryPath componentYamlDirectory, XamarinComponentSettings settings = null)
+        public static void PackageComponent(this ICakeContext context, DirectoryPath componentYamlDirectory, XamarinComponentSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Package (componentYamlDirectory, settings ?? new XamarinComponentSettings ());
+            var runner = new XamarinComponentRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Package(componentYamlDirectory, settings ?? new XamarinComponentSettings());
         }
 
         /// <summary>
@@ -161,7 +69,7 @@ namespace Cake.Xamarin
         /// <param name="xamFileGlobbingPatterns">The globbing patterns to find .xam component package files with.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void UploadComponents (this ICakeContext context, XamarinComponentUploadSettings settings, params string[] xamFileGlobbingPatterns)
+        public static void UploadComponents(this ICakeContext context, XamarinComponentUploadSettings settings, params string[] xamFileGlobbingPatterns)
         {
             foreach (var pattern in xamFileGlobbingPatterns)
             {
@@ -183,9 +91,9 @@ namespace Cake.Xamarin
         /// <param name="xamComponentPackage">The .xam component package file.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void UploadComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentUploadSettings settings = null)
+        public static void UploadComponent(this ICakeContext context, FilePath xamComponentPackage, XamarinComponentUploadSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new XamarinComponentRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
 
             int attempts = 0;
             bool success = false;
@@ -195,11 +103,11 @@ namespace Cake.Xamarin
                 attempts++;
                 try
                 {
-                    runner.Upload (xamComponentPackage, settings ?? new XamarinComponentUploadSettings ());
+                    runner.Upload(xamComponentPackage, settings ?? new XamarinComponentUploadSettings());
                     success = true;
                     break;
                 }
-                catch 
+                catch
                 {
                     context.Warning("Component Upload failed attempt #{0} of {1}", attempts, settings.MaxAttempts);
                 }
@@ -219,7 +127,7 @@ namespace Cake.Xamarin
         /// <param name="xamFileGlobbingPatterns">The globbing patterns to find .xam component package files with.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void SubmitComponents (this ICakeContext context, XamarinComponentSubmitSettings settings, params string[] xamFileGlobbingPatterns)
+        public static void SubmitComponents(this ICakeContext context, XamarinComponentSubmitSettings settings, params string[] xamFileGlobbingPatterns)
         {
             foreach (var pattern in xamFileGlobbingPatterns)
             {
@@ -241,9 +149,9 @@ namespace Cake.Xamarin
         /// <param name="xamComponentPackage">The .xam component package file.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void SubmitComponent (this ICakeContext context, FilePath xamComponentPackage, XamarinComponentSubmitSettings settings = null)
+        public static void SubmitComponent(this ICakeContext context, FilePath xamComponentPackage, XamarinComponentSubmitSettings settings = null)
         {
-            var runner = new XamarinComponentRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new XamarinComponentRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
 
             int attempts = 0;
             bool success = false;
@@ -253,11 +161,11 @@ namespace Cake.Xamarin
                 attempts++;
                 try
                 {
-                    runner.Submit (xamComponentPackage, settings ?? new XamarinComponentSubmitSettings ());
+                    runner.Submit(xamComponentPackage, settings ?? new XamarinComponentSubmitSettings());
                     success = true;
                     break;
                 }
-                catch 
+                catch
                 {
                     context.Warning("Component Submit failed attempt #{0} of {1}", attempts, settings.MaxAttempts);
                 }
@@ -277,10 +185,10 @@ namespace Cake.Xamarin
         /// <param name="testsAssembly">The assembly containing NUnit UITests.</param>
         /// <param name="nunitSettings">The NUnit settings.</param>
         [CakeMethodAlias]
-        public static void UITest (this ICakeContext context, FilePath testsAssembly, NUnitSettings nunitSettings = null)
-        {            
+        public static void UITest(this ICakeContext context, FilePath testsAssembly, NUnitSettings nunitSettings = null)
+        {
             // Run UITests via NUnit
-            context.NUnit (new [] { testsAssembly }, nunitSettings ?? new NUnitSettings ());
+            context.NUnit(new[] { testsAssembly }, nunitSettings ?? new NUnitSettings());
         }
 
         /// <summary>
@@ -294,22 +202,110 @@ namespace Cake.Xamarin
         /// <param name="uitestsAssemblies">The directory containing the UITests assemblies.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void TestCloud (this ICakeContext context, FilePath apkFile, string apiKey, string devicesHash, string userEmail, DirectoryPath uitestsAssemblies, TestCloudSettings settings = null)
+        public static void TestCloud(this ICakeContext context, FilePath apkFile, string apiKey, string devicesHash, string userEmail, DirectoryPath uitestsAssemblies, TestCloudSettings settings = null)
         {
-            var runner = new TestCloudRunner (context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run (apkFile, apiKey, devicesHash, userEmail, uitestsAssemblies, settings ?? new TestCloudSettings ());
+            var runner = new TestCloudRunner(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run(apkFile, apiKey, devicesHash, userEmail, uitestsAssemblies, settings ?? new TestCloudSettings());
+        }
+
+        /// <summary>
+        /// Creates an android .APK package file using the MSBuild target `SignAndroidPackage`
+        /// See documentation for more info: https://developer.xamarin.com/guides/android/under_the_hood/build_process/#Build_Targets
+        /// </summary>
+        /// <returns>The file path of the .APK which was created (all subfolders of the project file specified are searched for .apk files and the newest one found is returned).</returns>
+        /// <param name="context">The context.</param>
+        /// <param name="projectFile">The .CSPROJ file to build from.</param>
+        /// <param name="sign">Will create a signed .APK file if set to <c>true</c> based on the signing settings in the .CSPROJ, otherwise the .APK will be unsigned.</param>
+        /// <param name="configuration">The MSBuild /p:Configuration to use (default is Release).</param>
+        /// <param name="configurator">The settings configurator.</param>
+        [CakeMethodAlias]
+        public static FilePath BuildAndroidApk(this ICakeContext context, FilePath projectFile, bool sign = false, string configuration = "Release", Action<MSBuildSettings> configurator = null)
+        {
+            var target = sign ? "SignAndroidPackage" : "PackageForAndroid";
+
+            if (!context.FileSystem.Exist(projectFile))
+                throw new CakeException("Project File Not Found: " + projectFile.FullPath);
+
+            context.MSBuild(projectFile, c => {
+                c.Configuration = configuration;
+                c.Targets.Add(target);
+
+                // Pass along configuration to user for further changes
+                configurator?.Invoke(c);
+            });
+
+            var searchPattern = projectFile.GetDirectory() + (sign ? "/**/*-Signed.apk" : "/**/*.apk");
+
+            // Use the globber to find any .apk files within the tree
+            return context.Globber
+                .GetFiles(searchPattern)
+                .OrderByDescending(f => new FileInfo(f.FullPath).LastWriteTimeUtc)
+                .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Creates an IPA archive of an iOS Appof an app with MDTool
+        /// Change your project settings to output an IPA file, and use the MSBuild to build.
+        /// See documentation for more info: https://developer.xamarin.com/guides/ios/deployment,_testing,_and_metrics/app_distribution/ipa_support/#Building_via_the_Command_Line_On_Mac
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="projectFile">The .CSPROJ file to build from.</param>
+        /// <param name="configuration">The MSBuild /p:Configuration to use (default is Release).</param>
+        /// <param name="configuration">The MSBuild /p:Platform to build with configuration to use (default is iPhone).</param>
+        /// <param name="settings">The MSBuild settings.</param>
+        [CakeMethodAlias]
+        public static FilePath BuildiOSIpa(this ICakeContext context, FilePath projectFile, string configuration = "Release", string platform = "iPhone", Action<MSBuildSettings> settings = null)
+        {
+            if (!context.FileSystem.Exist(projectFile))
+                throw new CakeException("Project File Not Found: " + projectFile.FullPath);
+
+            var tempDir = new DirectoryPath(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "CakeXamarinTmp"));
+
+            context.EnsureDirectoryExists(tempDir);
+
+            context.MSBuild(projectFile, c => {
+                c.Configuration = configuration;
+                c.Targets.Add("Build");
+                c.Properties.Add("Platform", new List<string> { platform });
+                c.Properties.Add("BuildIpa", new List<string> { "true" });
+                c.Properties.Add("IpaPackageDir", new List<string> { tempDir.FullPath });
+
+                // Pass along configuration to user for further changes
+                settings?.Invoke(c);
+            });
+
+            var searchPattern = tempDir.FullPath.TrimEnd('/') + "/**/*.ipa";
+
+            // Use the globber to find any .apk files within the tree
+            return context.Globber
+                .GetFiles(searchPattern)
+                .OrderByDescending(f => new FileInfo(f.FullPath).LastWriteTimeUtc)
+                .FirstOrDefault();
         }
     }
 
-	/// <summary>
-	/// Common project type GUID values for Xamarin projects.
-	/// </summary>
-	public static class CommonProjectTypeGuids
-	{
-		public const string XamarinAndroid 			= "{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}";
-		public const string XamarinAndroidBinding 	= "{10368E6C-D01B-4462-8E8B-01FC667A7035}";
+    /// <summary>
+    /// Common project type GUID values for Xamarin projects.
+    /// </summary>
+    public static class CommonProjectTypeGuids
+    {
+        /// <summary>
+        /// Xamarin.Android Project Type GUID
+        /// </summary>
+        public const string XamarinAndroid = "{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}";
 
-		public const string XamariniOS 				= "{FEACFBD2-3405-455C-9665-78FE426C6842}";
-		public const string XamariniOSBinding 		= "{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC}";
-	}
+        /// <summary>
+        /// Xamarin.Android Binding Project Type Guid
+        /// </summary>
+        public const string XamarinAndroidBinding = "{10368E6C-D01B-4462-8E8B-01FC667A7035}";
+
+        /// <summary>
+        /// Xamarin.iOS Project Type GUID
+        /// </summary>
+        public const string XamariniOS = "{FEACFBD2-3405-455C-9665-78FE426C6842}";
+        /// <summary>
+        /// Xamarin.iOS Binding Project Type GUID
+        /// </summary>
+        public const string XamariniOSBinding = "{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC}";
+    }
 }

@@ -5,6 +5,7 @@ using Cake.Common.Tools;
 using System.Linq;
 using Cake.Common.Text;
 using Xunit;
+using Cake.Common.Tools.MSBuild;
 
 namespace Cake.Xamarin.Tests
 {
@@ -21,10 +22,10 @@ namespace Cake.Xamarin.Tests
                 .FirstOrDefault ();
 
             // Build the sln so the unit tests assembly gets built
-            Cake.DotNetBuild ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");
+            Cake.MSBuild ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");
 
             // Build the .apk to test
-            var apk = Cake.AndroidPackage ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj");
+            var apk = Cake.BuildAndroidApk ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj");
 
             // Copy to the expected location of the UITests
             Cake.CopyFile (apk, "./TestProjects/HelloWorldAndroid/HelloWorldAndroid.UITests/bin/Debug/app.apk");
@@ -46,10 +47,10 @@ namespace Cake.Xamarin.Tests
                 .FirstOrDefault ();
 
             // Build the sln so the unit tests assembly gets built
-            Cake.DotNetBuild ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");
+            Cake.MSBuild ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid.sln");
 
             // Build the .apk to test
-            var apk = Cake.AndroidPackage ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj", true);
+            var apk = Cake.BuildAndroidApk ("./TestProjects/HelloWorldAndroid/HelloWorldAndroid/HelloWorldAndroid.csproj", true);
 
             var xtcApiKey = Cake.TransformTextFile ("../xtc-api-key").ToString ();
             var xtcEmail = Cake.TransformTextFile ("../xtc-email").ToString ();

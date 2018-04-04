@@ -13,7 +13,7 @@ namespace Cake.Xamarin
 		private readonly ICakeEnvironment _environment;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MDToolSetupRunner" /> class.
+		/// Initializes a new instance of the <see cref="VSToolSetupRunner" /> class.
 		/// </summary>
 		/// <param name="fileSystem">The file system</param>
 		/// <param name="environment">The environment</param>
