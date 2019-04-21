@@ -1,9 +1,9 @@
 ﻿using System;
-using Cake.Core.IO;
 using Cake.Core;
-using System.Collections.Generic;
+using Cake.Core.IO;
 using Cake.Core.Tooling;
 using Cake.Testing;
+using NSubstitute;
 
 namespace Cake.Xamarin.Fakes
 {
@@ -22,13 +22,14 @@ namespace Cake.Xamarin.Fakes
 			var environment = new CakeEnvironment(new CakePlatform(), new CakeRuntime(), log);
 			var globber = new Globber(fileSystem, environment);
 			var args = new FakeCakeArguments();
-			var processRunner = new ProcessRunner(environment, log);
 			var registry = new WindowsRegistry();
 			var toolRepo = new ToolRepository(environment);
-			var config = new Core.Configuration.CakeConfigurationProvider(fileSystem, environment).CreateConfiguration(testsDir, new Dictionary<string, string>());
+			var config = new FakeConfiguration();
 			var toolResolutionStrategy = new ToolResolutionStrategy(fileSystem, environment, globber, config);
 			var toolLocator = new ToolLocator(environment, toolRepo, toolResolutionStrategy);
-			context = new CakeContext(fileSystem, environment, globber, log, args, processRunner, registry, toolLocator);
+			var processRunner = new ProcessRunner(fileSystem, environment, log, toolLocator, config);
+			var data = Substitute.For<ICakeDataService>();
+			context = new CakeContext(fileSystem, environment, globber, log, args, processRunner, registry, toolLocator, data, config);
 			context.Environment.WorkingDirectory = testsDir;
 		}
 
