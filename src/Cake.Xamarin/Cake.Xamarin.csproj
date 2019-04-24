@@ -14,7 +14,7 @@
     <Authors>Redth</Authors>
     <Owners>Redth</Owners>
     <PackageProjectUrl>https://github.com/redth/Cake.Xamarin</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/redth/Cake.Xamarin/master/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/redth/Cake.Xamarin/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
 
