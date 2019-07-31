@@ -2,7 +2,8 @@ bin/
 obj/
 packages/
 Components/
-tools/
+tools/**
+!tools/packages.config
 nupkg/
 *.userprefs
 *.suo

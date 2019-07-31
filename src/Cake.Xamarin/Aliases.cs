@@ -251,7 +251,7 @@ namespace Cake.Xamarin
         /// <param name="context">The context.</param>
         /// <param name="projectFile">The .CSPROJ file to build from.</param>
         /// <param name="configuration">The MSBuild /p:Configuration to use (default is Release).</param>
-        /// <param name="configuration">The MSBuild /p:Platform to build with configuration to use (default is iPhone).</param>
+        /// <param name="platform">The MSBuild /p:Platform to build with configuration to use (default is iPhone).</param>
         /// <param name="settings">The MSBuild settings.</param>
         [CakeMethodAlias]
         public static FilePath BuildiOSIpa(this ICakeContext context, FilePath projectFile, string configuration = "Release", string platform = "iPhone", Action<MSBuildSettings> settings = null)

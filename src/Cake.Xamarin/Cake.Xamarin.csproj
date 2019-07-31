@@ -14,16 +14,13 @@
     <Authors>Redth</Authors>
     <Owners>Redth</Owners>
     <PackageProjectUrl>https://github.com/redth/Cake.Xamarin</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/redth/Cake.Xamarin/master/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/redth/Cake.Xamarin/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.26.1" />
-    <PackageReference Include="Cake.Common" Version="0.26.1" />
+    <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
+    <PackageReference Include="Cake.Common" Version="0.33.0" PrivateAssets="All" />
   </ItemGroup>
- 
-  <ItemGroup>
-    <Compile Remove="Util.cs" />
-  </ItemGroup>
+
 </Project>
