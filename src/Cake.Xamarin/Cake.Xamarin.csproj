@@ -12,10 +12,12 @@
     <Description>Cake Build addon for Xamarin.</Description>
     <PackageTags>Cake Script Build Xamarin</PackageTags>
     <Authors>Redth</Authors>
-    <Owners>Redth</Owners>
-    <PackageProjectUrl>https://github.com/redth/Cake.Xamarin</PackageProjectUrl>
+    <Owners>Redth, cake-contrib</Owners>
+    <PackageProjectUrl>https://github.com/cake-contrib/Cake.Xamarin</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/cake-contrib/Cake.Xamarin.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/redth/Cake.Xamarin/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
