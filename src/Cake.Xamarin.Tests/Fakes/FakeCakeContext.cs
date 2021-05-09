@@ -20,9 +20,7 @@ namespace Cake.Xamarin.Fakes
 
             var fileSystem = new FileSystem();
             log = new FakeLog();
-            var runtime = new CakeRuntime();
-            var platform = new FakePlatform(PlatformFamily.Windows);
-            var environment = new CakeEnvironment(platform, runtime);
+            var environment = new CakeEnvironment(new CakePlatform(), new CakeRuntime());
             var globber = new Globber(fileSystem, environment);
 
             var args = new FakeCakeArguments();
