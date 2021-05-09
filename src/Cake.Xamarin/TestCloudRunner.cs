@@ -1,19 +1,17 @@
-﻿using System;
+﻿using Cake.Core;
 using Cake.Core.IO;
-using Cake.Core.Utilities;
-using Cake.Core;
-using System.Collections.Generic;
 using Cake.Core.Tooling;
+using System.Collections.Generic;
 
 namespace Cake.Xamarin
 {
     /// <summary>
     /// Test cloud settings.
     /// </summary>
-    public class TestCloudSettings : Cake.Core.Tooling.ToolSettings
+    public class TestCloudSettings : ToolSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Cake.Xamarin.TestCloudSettings"/> class.
+        /// Initializes a new instance of the <see cref="TestCloudSettings"/> class.
         /// </summary>
         public TestCloudSettings () : base ()
         {
@@ -100,7 +98,7 @@ namespace Cake.Xamarin
         public string KeystoreAliasPassword { get; set; }
     }
 
-    internal class TestCloudRunner : Cake.Core.Tooling.Tool<TestCloudSettings>
+    internal class TestCloudRunner : Tool<TestCloudSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
