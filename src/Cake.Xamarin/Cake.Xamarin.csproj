@@ -18,19 +18,19 @@
     <Title>Cake.Xamarin</Title>
     <Summary>Xamarin addon for cake build.</Summary>
     <Description>Cake Build addon for Xamarin.</Description>
-    <PackageTags>Cake Script Build Xamarin</PackageTags>
+    <PackageTags>Cake Script Build Xamarin cake-addin</PackageTags>
     <Authors>Redth</Authors>
     <Owners>Redth, cake-contrib</Owners>
     <PackageProjectUrl>https://github.com/cake-contrib/Cake.Xamarin</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/cake-contrib/Cake.Xamarin.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/addin/cake-contrib-addin-medium.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
-    <PackageReference Include="Cake.Common" Version="0.33.0" PrivateAssets="All" />
+    <PackageReference Include="Cake.Core" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Cake.Common" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

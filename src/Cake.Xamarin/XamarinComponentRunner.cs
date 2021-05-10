@@ -1,12 +1,11 @@
-using System.Collections.Generic;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
-using Cake.Core.Utilities;
+using System.Collections.Generic;
 
 namespace Cake.Xamarin
-{    
-    internal class XamarinComponentRunner : Cake.Core.Tooling.Tool<XamarinComponentSettings>
+{
+    internal class XamarinComponentRunner : Tool<XamarinComponentSettings>
     {
         readonly ICakeEnvironment _cakeEnvironment;
 
