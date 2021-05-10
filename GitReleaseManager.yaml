@@ -21,9 +21,9 @@ create:
   footer-heading: Where to get it
   footer-content: >
     You can download this release from
-    [nuget](https://nuget.org/packages/Cake.FileHelpers/{milestone}),
+    [nuget](https://nuget.org/packages/Cake.Xamarin/{milestone}),
     or you can just reference it in a cake build script
-    with `#addin nuget:?package=Cake.FileHelpers&version={milestone}`.
+    with `#addin nuget:?package=Cake.Xamarin&version={milestone}`.
   footer-includes-milestone: true
   milestone-replace-text: "{milestone}"
   include-sha-section: true
