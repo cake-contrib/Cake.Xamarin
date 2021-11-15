@@ -10,6 +10,9 @@ end_of_line = CRLF
 indent_style = space
 indent_size = 4
 
+[*.sh]
+end_of_line = LF
+
 [*.cs]
 indent_style = space
 indent_size = 4
